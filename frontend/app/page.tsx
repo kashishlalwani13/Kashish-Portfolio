@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const roleFocus = [
   "Applied ML & AI",
@@ -261,38 +264,89 @@ const interests = [
   "Roller Skating",
 ];
 
+type ModalType = "experience" | "projects" | null;
+
+const navLinkClass =
+  "transition-colors duration-300 hover:text-[#c6a972]";
+
+const primaryButtonClass =
+  "rounded-full bg-[#c6a972] px-6 py-3 font-medium text-black transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90";
+
+const secondaryButtonClass =
+  "rounded-full border border-white/20 px-6 py-3 font-medium text-[#f5efe6] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#c6a972] hover:text-[#c6a972]";
+
+const smallSecondaryButtonClass =
+  "rounded-full border border-white/20 px-5 py-2.5 font-medium text-[#f5efe6] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#c6a972] hover:text-[#c6a972]";
+
+const smallPrimaryButtonClass =
+  "rounded-full bg-[#c6a972] px-5 py-2.5 font-medium text-black transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90";
+
+const interactiveCardClass =
+  "rounded-3xl border border-white/10 bg-white/5 p-8 transition-all duration-300 hover:-translate-y-1 hover:border-[#c6a972]/35 hover:bg-white/[0.07] hover:shadow-2xl";
+
+const statCardClass =
+  "rounded-2xl border border-white/10 bg-white/5 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-[#c6a972]/30 hover:bg-white/[0.07]";
+
+const chipClass =
+  "rounded-full border border-[#c6a972]/30 bg-[#c6a972]/10 px-4 py-2 text-sm text-[#eadfcd] transition-colors duration-300 hover:border-[#c6a972]/50 hover:bg-[#c6a972]/15";
+
+const darkChipClass =
+  "rounded-full border border-white/10 bg-[#111111] px-4 py-2 text-sm text-[#d8d0c4] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#c6a972]/30 hover:text-[#f5efe6]";
+
 export default function Home() {
+  const [activeModal, setActiveModal] = useState<ModalType>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setActiveModal(null);
+      }
+    };
+
+    if (activeModal) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [activeModal]);
+
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-[#f5efe6]">
       <nav className="sticky top-0 z-50 border-b border-white/10 bg-[#0a0a0a]/85 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <a
             href="#top"
-            className="text-lg font-semibold tracking-wide text-[#c6a972]"
+            className="text-lg font-semibold tracking-wide text-[#c6a972] transition-opacity duration-300 hover:opacity-90"
           >
             Kashish Lalwani
           </a>
 
           <div className="hidden items-center gap-6 text-sm text-[#d8d0c4] lg:flex">
-            <a href="#about" className="transition hover:text-[#c6a972]">
+            <a href="#about" className={navLinkClass}>
               About
             </a>
-            <a href="#education" className="transition hover:text-[#c6a972]">
+            <a href="#education" className={navLinkClass}>
               Education
             </a>
-            <a href="#experience" className="transition hover:text-[#c6a972]">
+            <a href="#experience" className={navLinkClass}>
               Experience
             </a>
-            <a href="#projects" className="transition hover:text-[#c6a972]">
+            <a href="#projects" className={navLinkClass}>
               Projects
             </a>
-            <a href="#current-work" className="transition hover:text-[#c6a972]">
+            <a href="#current-work" className={navLinkClass}>
               Current Work
             </a>
-            <a href="#awards" className="transition hover:text-[#c6a972]">
+            <a href="#awards" className={navLinkClass}>
               Awards
             </a>
-            <a href="#contact" className="transition hover:text-[#c6a972]">
+            <a href="#contact" className={navLinkClass}>
               Contact
             </a>
           </div>
@@ -302,13 +356,13 @@ export default function Home() {
               href="/Kashish_Resume.pdf"
               target="_blank"
               rel="noreferrer"
-              className="hidden rounded-full border border-white/20 px-4 py-2 text-sm text-[#f5efe6] transition hover:border-[#c6a972] hover:text-[#c6a972] sm:inline-flex"
+              className="hidden rounded-full border border-white/20 px-4 py-2 text-sm text-[#f5efe6] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#c6a972] hover:text-[#c6a972] sm:inline-flex"
             >
               Resume
             </a>
             <a
               href="mailto:work.kashishlalwani@gmail.com"
-              className="rounded-full border border-[#c6a972] px-4 py-2 text-sm text-[#c6a972] transition hover:bg-[#c6a972] hover:text-black"
+              className="rounded-full border border-[#c6a972] px-4 py-2 text-sm text-[#c6a972] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c6a972] hover:text-black"
             >
               Email Me
             </a>
@@ -318,8 +372,15 @@ export default function Home() {
 
       <section
         id="top"
-        className="mx-auto grid min-h-[calc(100vh-80px)] max-w-7xl items-center gap-12 px-6 py-16 md:grid-cols-2"
+        className="relative mx-auto grid min-h-[calc(100vh-80px)] max-w-7xl items-center gap-12 overflow-hidden px-6 py-16 md:grid-cols-2"
       >
+        <div className="absolute inset-0 -z-30 bg-[#07111a]" />
+        <div className="absolute left-[-8%] top-[2%] -z-20 h-72 w-72 rounded-full bg-[#72d2dd]/10 blur-3xl" />
+        <div className="absolute bottom-[8%] right-[-8%] -z-20 h-[26rem] w-[26rem] rounded-full bg-[#0f3a5c]/30 blur-3xl" />
+        <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_top,_rgba(198,169,114,0.10),_transparent_42%)]" />
+        <div className="absolute inset-x-6 top-12 -z-10 h-px bg-white/15 md:inset-x-0" />
+        <div className="absolute inset-x-6 bottom-12 -z-10 h-px bg-white/10 md:inset-x-0" />
+
         <div>
           <p className="mb-4 text-sm uppercase tracking-[0.3em] text-[#c6a972]">
             Data Science • Applied ML • GenAI • Analytics
@@ -344,10 +405,7 @@ export default function Home() {
 
           <div className="mb-8 flex flex-wrap gap-3">
             {roleFocus.map((item) => (
-              <span
-                key={item}
-                className="rounded-full border border-[#c6a972]/30 bg-[#c6a972]/10 px-4 py-2 text-sm text-[#eadfcd]"
-              >
+              <span key={item} className={chipClass}>
                 {item}
               </span>
             ))}
@@ -358,7 +416,7 @@ export default function Home() {
               href="https://github.com/kashishlalwani13"
               target="_blank"
               rel="noreferrer"
-              className="rounded-full bg-[#c6a972] px-6 py-3 font-medium text-black transition hover:opacity-90"
+              className={primaryButtonClass}
             >
               GitHub
             </a>
@@ -367,7 +425,7 @@ export default function Home() {
               href="https://linkedin.com/in/kashishlalwani13"
               target="_blank"
               rel="noreferrer"
-              className="rounded-full border border-white/20 px-6 py-3 font-medium text-[#f5efe6] transition hover:border-[#c6a972] hover:text-[#c6a972]"
+              className={secondaryButtonClass}
             >
               LinkedIn
             </a>
@@ -376,29 +434,38 @@ export default function Home() {
               href="/Kashish_Resume.pdf"
               target="_blank"
               rel="noreferrer"
-              className="rounded-full border border-white/20 px-6 py-3 font-medium text-[#f5efe6] transition hover:border-[#c6a972] hover:text-[#c6a972]"
+              className={secondaryButtonClass}
             >
               Resume
             </a>
 
-            <a
-              href="#projects"
-              className="rounded-full border border-white/20 px-6 py-3 font-medium text-[#f5efe6] transition hover:border-[#c6a972] hover:text-[#c6a972]"
+            <button
+              type="button"
+              onClick={() => setActiveModal("experience")}
+              className={secondaryButtonClass}
             >
-              View Work
-            </a>
+              View Experience
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setActiveModal("projects")}
+              className={secondaryButtonClass}
+            >
+              View Projects
+            </button>
           </div>
 
           <div className="mt-10 grid max-w-2xl grid-cols-1 gap-4 text-sm text-[#b8afa1] md:grid-cols-3">
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <div className={statCardClass}>
               <p className="text-2xl font-semibold text-[#f5efe6]">1M+</p>
               <p>records processed in evaluation and analytics workflows</p>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <div className={statCardClass}>
               <p className="text-2xl font-semibold text-[#f5efe6]">100K+</p>
               <p>queries benchmarked across retrieval systems</p>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <div className={statCardClass}>
               <p className="text-2xl font-semibold text-[#f5efe6]">50K+</p>
               <p>daily events processed in experimentation infrastructure</p>
             </div>
@@ -412,14 +479,14 @@ export default function Home() {
         <div className="relative flex justify-center md:justify-end">
           <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,_rgba(198,169,114,0.18),_transparent_55%)]" />
 
-          <div className="relative w-full max-w-md overflow-hidden rounded-[2rem] border border-[#c6a972]/30 bg-[#151515] p-3 shadow-2xl">
+          <div className="relative w-full max-w-md overflow-hidden rounded-[2rem] border border-[#c6a972]/30 bg-[#151515]/90 p-3 shadow-2xl backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 hover:border-[#c6a972]/45">
             <div className="absolute left-4 top-4 h-24 w-24 rounded-full bg-[#c6a972]/10 blur-2xl" />
             <Image
               src="/images/profile.jpg"
               alt="Kashish Lalwani"
               width={900}
               height={1200}
-              className="h-auto w-full rounded-[1.5rem] object-cover"
+              className="h-auto w-full rounded-[1.5rem] object-cover transition-transform duration-500 hover:scale-[1.01]"
               priority
             />
           </div>
@@ -437,7 +504,7 @@ export default function Home() {
         </div>
 
         <div className="grid gap-8 md:grid-cols-2">
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-8">
+          <div className={interactiveCardClass}>
             <p className="text-lg leading-8 text-[#d8d0c4]">
               I’m a Data Science graduate student at Stony Brook University
               focused on building systems that are not only intelligent, but
@@ -447,7 +514,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-8">
+          <div className={interactiveCardClass}>
             <p className="mb-4 text-sm uppercase tracking-[0.2em] text-[#c6a972]">
               What I care about
             </p>
@@ -473,10 +540,7 @@ export default function Home() {
 
         <div className="grid gap-6 md:grid-cols-2">
           {education.map((item) => (
-            <div
-              key={item.school}
-              className="rounded-3xl border border-white/10 bg-white/5 p-8"
-            >
+            <div key={item.school} className={interactiveCardClass}>
               <h3 className="text-2xl font-semibold text-[#f5efe6]">
                 {item.school}
               </h3>
@@ -507,7 +571,7 @@ export default function Home() {
           {experiences.map((item) => (
             <div
               key={`${item.role}-${item.company}`}
-              className="rounded-3xl border border-white/10 bg-white/5 p-8"
+              className={interactiveCardClass}
             >
               <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
                 <div>
@@ -548,18 +612,15 @@ export default function Home() {
 
         <div className="space-y-6">
           {featuredProjects.map((project) => (
-            <div
-              key={project.title}
-              className="rounded-3xl border border-white/10 bg-white/5 p-8 transition hover:border-[#c6a972]/40 hover:bg-white/[0.07]"
-            >
+            <div key={project.title} className={interactiveCardClass}>
               <div className="mb-3 flex flex-wrap items-center gap-3">
                 <p className="text-sm uppercase tracking-[0.18em] text-[#c6a972]">
                   {project.tag}
                 </p>
                 <span
                   className={`rounded-full px-3 py-1 text-xs uppercase tracking-[0.16em] ${project.status === "Public"
-                    ? "border border-emerald-400/20 bg-emerald-400/10 text-emerald-200"
-                    : "border border-amber-400/20 bg-amber-400/10 text-amber-200"
+                      ? "border border-emerald-400/20 bg-emerald-400/10 text-emerald-200"
+                      : "border border-amber-400/20 bg-amber-400/10 text-amber-200"
                     }`}
                 >
                   {project.status}
@@ -588,7 +649,7 @@ export default function Home() {
                   href={project.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-full bg-[#c6a972] px-5 py-2.5 font-medium text-black transition hover:opacity-90"
+                  className={smallPrimaryButtonClass}
                 >
                   {project.linkLabel}
                 </a>
@@ -598,7 +659,7 @@ export default function Home() {
                     href={project.secondaryLink}
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded-full border border-white/20 px-5 py-2.5 font-medium text-[#f5efe6] transition hover:border-[#c6a972] hover:text-[#c6a972]"
+                    className={smallSecondaryButtonClass}
                   >
                     {project.secondaryLabel}
                   </a>
@@ -615,18 +676,15 @@ export default function Home() {
 
           <div className="grid gap-6 md:grid-cols-2">
             {selectedProjects.map((project) => (
-              <div
-                key={project.title}
-                className="rounded-3xl border border-white/10 bg-white/5 p-8"
-              >
+              <div key={project.title} className={interactiveCardClass}>
                 <div className="mb-3 flex flex-wrap items-center gap-3">
                   <h3 className="text-2xl font-semibold text-[#f5efe6]">
                     {project.title}
                   </h3>
                   <span
                     className={`rounded-full px-3 py-1 text-xs uppercase tracking-[0.16em] ${project.status === "Public"
-                      ? "border border-emerald-400/20 bg-emerald-400/10 text-emerald-200"
-                      : "border border-amber-400/20 bg-amber-400/10 text-amber-200"
+                        ? "border border-emerald-400/20 bg-emerald-400/10 text-emerald-200"
+                        : "border border-amber-400/20 bg-amber-400/10 text-amber-200"
                       }`}
                   >
                     {project.status}
@@ -650,7 +708,7 @@ export default function Home() {
                     href={project.github}
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded-full border border-white/20 px-5 py-2.5 font-medium text-[#f5efe6] transition hover:border-[#c6a972] hover:text-[#c6a972]"
+                    className={smallSecondaryButtonClass}
                   >
                     GitHub
                   </a>
@@ -666,7 +724,7 @@ export default function Home() {
       </section>
 
       <section id="current-work" className="mx-auto max-w-7xl px-6 py-20">
-        <div className="rounded-[2rem] border border-[#c6a972]/20 bg-[#121212] p-10">
+        <div className="rounded-[2rem] border border-[#c6a972]/20 bg-[#121212] p-10 transition-all duration-300 hover:-translate-y-1 hover:border-[#c6a972]/35 hover:shadow-2xl">
           <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[#c6a972]">
             Current Work
           </p>
@@ -684,7 +742,7 @@ export default function Home() {
             {currentWork.bullets.map((bullet) => (
               <li
                 key={bullet}
-                className="rounded-2xl border border-white/10 bg-white/5 p-5 leading-8 text-[#d8d0c4]"
+                className="rounded-2xl border border-white/10 bg-white/5 p-5 leading-8 text-[#d8d0c4] transition-all duration-300 hover:-translate-y-1 hover:border-[#c6a972]/30 hover:bg-white/[0.07]"
               >
                 {bullet}
               </li>
@@ -705,19 +763,13 @@ export default function Home() {
 
         <div className="grid gap-6 md:grid-cols-2">
           {Object.entries(skills).map(([category, items]) => (
-            <div
-              key={category}
-              className="rounded-3xl border border-white/10 bg-white/5 p-8"
-            >
+            <div key={category} className={interactiveCardClass}>
               <h3 className="mb-5 text-xl font-semibold text-[#f5efe6]">
                 {category}
               </h3>
               <div className="flex flex-wrap gap-3">
                 {items.map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full border border-[#c6a972]/30 bg-[#c6a972]/10 px-4 py-2 text-sm text-[#e8dcc8]"
-                  >
+                  <span key={item} className={chipClass}>
                     {item}
                   </span>
                 ))}
@@ -735,13 +787,10 @@ export default function Home() {
           <h2 className="text-3xl font-semibold md:text-4xl">How I work</h2>
         </div>
 
-        <div className="rounded-3xl border border-white/10 bg-white/5 p-8">
+        <div className="rounded-3xl border border-white/10 bg-white/5 p-8 transition-all duration-300 hover:border-[#c6a972]/30 hover:bg-white/[0.07]">
           <div className="flex flex-wrap gap-3">
             {professionalStrengths.map((item) => (
-              <span
-                key={item}
-                className="rounded-full border border-white/10 bg-[#111111] px-4 py-2 text-sm text-[#d8d0c4]"
-              >
+              <span key={item} className={darkChipClass}>
                 {item}
               </span>
             ))}
@@ -761,10 +810,7 @@ export default function Home() {
 
         <div className="grid gap-6 md:grid-cols-1">
           {leadership.map((item) => (
-            <div
-              key={item.title}
-              className="rounded-3xl border border-white/10 bg-white/5 p-8"
-            >
+            <div key={item.title} className={interactiveCardClass}>
               <h3 className="mb-2 text-2xl font-semibold text-[#f5efe6]">
                 {item.title}
               </h3>
@@ -789,10 +835,7 @@ export default function Home() {
 
         <div className="grid gap-6">
           {writing.map((item) => (
-            <div
-              key={item.title}
-              className="rounded-3xl border border-white/10 bg-white/5 p-8"
-            >
+            <div key={item.title} className={interactiveCardClass}>
               <p className="mb-3 text-sm uppercase tracking-[0.18em] text-[#c6a972]">
                 {item.type}
               </p>
@@ -807,7 +850,7 @@ export default function Home() {
                 href={item.link}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-full border border-white/20 px-5 py-2.5 font-medium text-[#f5efe6] transition hover:border-[#c6a972] hover:text-[#c6a972]"
+                className={smallSecondaryButtonClass}
               >
                 Read Article
               </a>
@@ -828,10 +871,7 @@ export default function Home() {
 
         <div className="grid gap-6 md:grid-cols-2">
           {awards.map((award) => (
-            <div
-              key={award.title}
-              className="rounded-3xl border border-white/10 bg-white/5 p-8"
-            >
+            <div key={award.title} className={interactiveCardClass}>
               <div className="mb-3 flex items-center justify-between gap-3">
                 <h3 className="text-2xl font-semibold text-[#f5efe6]">
                   {award.title}
@@ -848,7 +888,7 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-20">
-        <div className="rounded-3xl border border-white/10 bg-white/5 p-8">
+        <div className="rounded-3xl border border-white/10 bg-white/5 p-8 transition-all duration-300 hover:border-[#c6a972]/30 hover:bg-white/[0.07]">
           <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[#c6a972]">
             Interests
           </p>
@@ -857,10 +897,7 @@ export default function Home() {
           </h2>
           <div className="flex flex-wrap gap-3">
             {interests.map((item) => (
-              <span
-                key={item}
-                className="rounded-full border border-white/10 bg-[#111111] px-4 py-2 text-sm text-[#d8d0c4]"
-              >
+              <span key={item} className={darkChipClass}>
                 {item}
               </span>
             ))}
@@ -869,7 +906,7 @@ export default function Home() {
       </section>
 
       <section id="contact" className="mx-auto max-w-7xl px-6 py-20">
-        <div className="rounded-[2rem] border border-[#c6a972]/20 bg-[#121212] p-10">
+        <div className="rounded-[2rem] border border-[#c6a972]/20 bg-[#121212] p-10 transition-all duration-300 hover:-translate-y-1 hover:border-[#c6a972]/35 hover:shadow-2xl">
           <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[#c6a972]">
             Contact
           </p>
@@ -882,49 +919,49 @@ export default function Home() {
           </p>
 
           <div className="grid gap-4 md:grid-cols-2">
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#c6a972]/30 hover:bg-white/[0.07]">
               <p className="mb-2 text-sm uppercase tracking-[0.14em] text-[#c6a972]">
                 Primary Email
               </p>
               <a
                 href="mailto:work.kashishlalwani@gmail.com"
-                className="text-[#f5efe6] transition hover:text-[#c6a972]"
+                className="text-[#f5efe6] transition-colors duration-300 hover:text-[#c6a972]"
               >
                 work.kashishlalwani@gmail.com
               </a>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#c6a972]/30 hover:bg-white/[0.07]">
               <p className="mb-2 text-sm uppercase tracking-[0.14em] text-[#c6a972]">
                 Alternate Email
               </p>
               <a
                 href="mailto:kaashishlalwani@gmail.com"
-                className="text-[#f5efe6] transition hover:text-[#c6a972]"
+                className="text-[#f5efe6] transition-colors duration-300 hover:text-[#c6a972]"
               >
                 kaashishlalwani@gmail.com
               </a>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#c6a972]/30 hover:bg-white/[0.07]">
               <p className="mb-2 text-sm uppercase tracking-[0.14em] text-[#c6a972]">
                 USA Phone
               </p>
               <a
                 href="tel:+19342463035"
-                className="text-[#f5efe6] transition hover:text-[#c6a972]"
+                className="text-[#f5efe6] transition-colors duration-300 hover:text-[#c6a972]"
               >
                 +1 934 246 3035
               </a>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#c6a972]/30 hover:bg-white/[0.07]">
               <p className="mb-2 text-sm uppercase tracking-[0.14em] text-[#c6a972]">
                 India Phone
               </p>
               <a
                 href="tel:+919371444111"
-                className="text-[#f5efe6] transition hover:text-[#c6a972]"
+                className="text-[#f5efe6] transition-colors duration-300 hover:text-[#c6a972]"
               >
                 +91 93714 44111
               </a>
@@ -936,7 +973,7 @@ export default function Home() {
               href="https://linkedin.com/in/kashishlalwani13"
               target="_blank"
               rel="noreferrer"
-              className="rounded-full bg-[#c6a972] px-6 py-3 font-medium text-black transition hover:opacity-90"
+              className={primaryButtonClass}
             >
               LinkedIn
             </a>
@@ -945,7 +982,7 @@ export default function Home() {
               href="https://github.com/kashishlalwani13"
               target="_blank"
               rel="noreferrer"
-              className="rounded-full border border-white/20 px-6 py-3 font-medium text-[#f5efe6] transition hover:border-[#c6a972] hover:text-[#c6a972]"
+              className={secondaryButtonClass}
             >
               GitHub
             </a>
@@ -954,13 +991,156 @@ export default function Home() {
               href="/Kashish_Resume.pdf"
               target="_blank"
               rel="noreferrer"
-              className="rounded-full border border-white/20 px-6 py-3 font-medium text-[#f5efe6] transition hover:border-[#c6a972] hover:text-[#c6a972]"
+              className={secondaryButtonClass}
             >
               Resume
             </a>
           </div>
         </div>
       </section>
+
+      {activeModal ? (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/75 px-4 py-6 backdrop-blur-sm"
+          onClick={() => setActiveModal(null)}
+        >
+          <div
+            className="relative max-h-[90vh] w-full max-w-5xl overflow-y-auto rounded-[2rem] border border-white/10 bg-[#0f1115]/95 p-6 shadow-2xl transition-all duration-300 sm:p-8 md:p-10"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="pointer-events-none absolute inset-0 rounded-[2rem] bg-[radial-gradient(circle_at_top,_rgba(198,169,114,0.08),_transparent_35%)]" />
+
+            <button
+              type="button"
+              onClick={() => setActiveModal(null)}
+              className="absolute right-5 top-5 z-10 h-11 w-11 rounded-full border border-white/10 bg-white/5 text-xl text-[#f5efe6] transition-all duration-300 hover:border-[#c6a972] hover:text-[#c6a972]"
+              aria-label="Close modal"
+            >
+              ×
+            </button>
+
+            {activeModal === "experience" ? (
+              <div className="relative z-10">
+                <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[#c6a972]">
+                  Experience
+                </p>
+                <h2 className="text-3xl font-semibold md:text-4xl">
+                  Professional Experience
+                </h2>
+                <div className="mb-8 mt-6 h-px w-full bg-white/15" />
+
+                <div className="space-y-6">
+                  {experiences.map((item) => (
+                    <div
+                      key={`${item.role}-${item.company}-modal`}
+                      className="rounded-3xl border border-white/10 bg-white/5 p-8 transition-all duration-300 hover:border-[#c6a972]/30 hover:bg-white/[0.07]"
+                    >
+                      <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+                        <div>
+                          <h3 className="text-2xl font-semibold text-[#f5efe6]">
+                            {item.role}
+                          </h3>
+                          <p className="mt-1 text-lg text-[#d8d0c4]">
+                            {item.company}, {item.location}
+                          </p>
+                          <p className="mt-2 text-sm uppercase tracking-[0.14em] text-[#c6a972]">
+                            {item.type}
+                          </p>
+                        </div>
+                        <p className="text-sm text-[#b8afa1]">{item.period}</p>
+                      </div>
+
+                      <ul className="space-y-3 text-[#d8d0c4]">
+                        {item.bullets.map((bullet) => (
+                          <li key={bullet} className="leading-8">
+                            • {bullet}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+
+            {activeModal === "projects" ? (
+              <div className="relative z-10">
+                <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[#c6a972]">
+                  Projects
+                </p>
+                <h2 className="text-3xl font-semibold md:text-4xl">
+                  Featured Projects
+                </h2>
+                <div className="mb-8 mt-6 h-px w-full bg-white/15" />
+
+                <div className="space-y-6">
+                  {featuredProjects.map((project) => (
+                    <div
+                      key={`${project.title}-modal`}
+                      className="rounded-3xl border border-white/10 bg-white/5 p-8 transition-all duration-300 hover:border-[#c6a972]/30 hover:bg-white/[0.07]"
+                    >
+                      <div className="mb-3 flex flex-wrap items-center gap-3">
+                        <p className="text-sm uppercase tracking-[0.18em] text-[#c6a972]">
+                          {project.tag}
+                        </p>
+                        <span
+                          className={`rounded-full px-3 py-1 text-xs uppercase tracking-[0.16em] ${project.status === "Public"
+                              ? "border border-emerald-400/20 bg-emerald-400/10 text-emerald-200"
+                              : "border border-amber-400/20 bg-amber-400/10 text-amber-200"
+                            }`}
+                        >
+                          {project.status}
+                        </span>
+                      </div>
+
+                      <h3 className="mb-4 text-2xl font-semibold text-[#f5efe6]">
+                        {project.title}
+                      </h3>
+
+                      <p className="mb-4 text-sm uppercase tracking-[0.12em] text-[#b8afa1]">
+                        {project.tech}
+                      </p>
+
+                      <p className="mb-4 leading-8 text-[#d8d0c4]">
+                        {project.description}
+                      </p>
+
+                      <p className="mb-6 leading-8 text-[#f1e7d8]">
+                        <span className="font-semibold text-[#c6a972]">
+                          Impact:
+                        </span>{" "}
+                        {project.impact}
+                      </p>
+
+                      <div className="flex flex-wrap gap-4">
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noreferrer"
+                          className={smallPrimaryButtonClass}
+                        >
+                          {project.linkLabel}
+                        </a>
+
+                        {project.secondaryLink && project.secondaryLabel ? (
+                          <a
+                            href={project.secondaryLink}
+                            target="_blank"
+                            rel="noreferrer"
+                            className={smallSecondaryButtonClass}
+                          >
+                            {project.secondaryLabel}
+                          </a>
+                        ) : null}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+          </div>
+        </div>
+      ) : null}
     </main>
   );
 }
