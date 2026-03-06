@@ -68,22 +68,25 @@ Experimentation framework for retrieval evaluation, query perturbation testing, 
 ---
 
 ## Project Structure
+
+```
 portfolio/
 │
 ├── frontend/
-│ ├── app/
-│ │ ├── layout.tsx
-│ │ └── page.tsx
-│ │
-│ ├── public/
-│ │ ├── images/
-│ │ └── Kashish_Resume.pdf
-│ │
-│ ├── globals.css
-│ └── next.config.ts
+│   ├── app/
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   │
+│   ├── public/
+│   │   ├── images/
+│   │   └── Kashish_Resume.pdf
+│   │
+│   ├── globals.css
+│   └── next.config.ts
 │
 ├── backend/ (future)
 │
 └── README.md
+```
 
 
