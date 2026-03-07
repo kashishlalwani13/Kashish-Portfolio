@@ -353,7 +353,7 @@ export default function Home() {
 
           <div className="flex items-center gap-3">
             <a
-              href="/Kashish_Resume.pdf"
+              href="/Kashish_Lalwani_Resume.pdf"
               target="_blank"
               rel="noreferrer"
               className="hidden rounded-full border border-white/20 px-4 py-2 text-sm text-[#f5efe6] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#c6a972] hover:text-[#c6a972] sm:inline-flex"
@@ -431,7 +431,7 @@ export default function Home() {
             </a>
 
             <a
-              href="/Kashish_Resume.pdf"
+              href="/Kashish_Lalwani_Resume.pdf"
               target="_blank"
               rel="noreferrer"
               className={secondaryButtonClass}
@@ -988,7 +988,7 @@ export default function Home() {
             </a>
 
             <a
-              href="/Kashish_Resume.pdf"
+              href="/Kashish_Lalwani_Resume.pdf"
               target="_blank"
               rel="noreferrer"
               className={secondaryButtonClass}
