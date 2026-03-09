@@ -12,7 +12,7 @@ const roleFocus = [
   "Evaluation-Driven ML",
 ];
 
-const skillCategories = [
+const skills = {
   {
     title: "Languages",
     icon: "💻",
