@@ -12,45 +12,43 @@ const roleFocus = [
   "Evaluation-Driven ML",
 ];
 
-const skills = {
-  Languages: ["Python", "SQL", "R", "C/C++"],
-  "ML / AI": [
-    "Machine Learning",
-    "Model Evaluation",
-    "Statistical Testing",
-    "Feature Engineering",
-    "PyTorch",
-    "TensorFlow",
-    "scikit-learn",
-  ],
-  "GenAI / Retrieval": [
-    "RAG",
-    "Embeddings",
-    "FAISS",
-    "Vector Search",
-    "LangChain",
-    "GPT APIs",
-    "Semantic Retrieval",
-  ],
-  "Data / Analytics": [
-    "A/B Testing",
-    "KPI Design",
-    "Root-Cause Analysis",
-    "Dashboarding",
-    "Decision Intelligence",
-    "ETL / ELT",
-  ],
-  "Systems / Infra": [
-    "FastAPI",
-    "Airflow",
-    "Docker",
-    "AWS",
-    "BigQuery",
-    "Git",
-    "Experimentation Infrastructure",
-  ],
-  "Visualization / BI": ["Tableau", "Power BI", "Looker", "Excel"],
-};
+const skillCategories = [
+  {
+    title: "Languages",
+    icon: "💻",
+    skills: ["Python", "SQL", "R", "JavaScript", "TypeScript", "HTML", "CSS", "Bash/Shell"],
+  },
+  {
+    title: "Data Analysis & Visualization",
+    icon: "📊",
+    skills: ["Pandas", "NumPy", "Matplotlib", "Seaborn", "Tableau", "Power BI", "Excel"],
+  },
+  {
+    title: "AI & ML Libraries",
+    icon: "🧠",
+    skills: ["PyTorch", "scikit-learn", "XGBoost", "LightGBM", "Transformers", "spaCy", "FAISS", "LangChain"],
+  },
+  {
+    title: "Frameworks, Databases & APIs",
+    icon: "🗄️",
+    skills: ["FastAPI", "Flask", "PostgreSQL", "MySQL", "MongoDB", "REST APIs", "OpenAI API"],
+  },
+  {
+    title: "Developer Tools",
+    icon: "🛠️",
+    skills: ["Git", "GitHub", "Docker", "Airflow", "CI/CD", "Linux", "Jupyter", "VS Code"],
+  },
+  {
+    title: "Concepts",
+    icon: "⚙️",
+    skills: ["Machine Learning", "Deep Learning", "NLP", "RAG", "Vector Search", "Embeddings", "ETL Pipelines", "A/B Testing", "Model Evaluation", "Feature Engineering"],
+  },
+  {
+    title: "Relevant Coursework",
+    icon: "🎓",
+    skills: ["Machine Learning", "Statistical Learning", "Data Mining", "Database Systems", "Probability & Statistics", "Optimization", "Data Visualization", "Time Series Analysis"],
+  },
+];
 
 const professionalStrengths = [
   "Analytical Thinking",
