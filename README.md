@@ -5,7 +5,7 @@ This repository contains the source code for my professional portfolio website s
 The portfolio highlights my projects, research work, technical skills, and experience building evaluation-driven ML systems, experimentation infrastructure, and AI-powered analytics products.
 
 Live Website  
-https://kashishlalwani.vercel.app
+https://kashishlalwani-portfolio.vercel.app
 
 
 ---
