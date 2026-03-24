@@ -16,37 +16,100 @@ const skills = [
   {
     title: "Languages",
     icon: "💻",
-    skills: ["Python", "SQL", "R", "JavaScript", "TypeScript", "HTML", "CSS", "Bash/Shell"],
+    skills: [
+      "Python",
+      "SQL",
+      "R",
+      "JavaScript",
+      "TypeScript",
+      "HTML",
+      "CSS",
+      "Bash/Shell",
+    ],
   },
   {
     title: "Data Analysis & Visualization",
     icon: "📊",
-    skills: ["Pandas", "NumPy", "Matplotlib", "Seaborn", "Tableau", "Power BI", "Excel"],
+    skills: [
+      "Pandas",
+      "NumPy",
+      "Matplotlib",
+      "Seaborn",
+      "Tableau",
+      "Power BI",
+      "Excel",
+    ],
   },
   {
     title: "AI & ML Libraries",
     icon: "🧠",
-    skills: ["PyTorch", "scikit-learn", "XGBoost", "LightGBM", "Transformers", "spaCy", "FAISS", "LangChain"],
+    skills: [
+      "PyTorch",
+      "scikit-learn",
+      "XGBoost",
+      "LightGBM",
+      "Transformers",
+      "spaCy",
+      "FAISS",
+      "LangChain",
+    ],
   },
   {
     title: "Frameworks, Databases & APIs",
     icon: "🗄️",
-    skills: ["FastAPI", "Flask", "PostgreSQL", "MySQL", "MongoDB", "REST APIs", "OpenAI API"],
+    skills: [
+      "FastAPI",
+      "Flask",
+      "PostgreSQL",
+      "MySQL",
+      "MongoDB",
+      "REST APIs",
+      "OpenAI API",
+    ],
   },
   {
     title: "Developer Tools",
     icon: "🛠️",
-    skills: ["Git", "GitHub", "Docker", "Airflow", "CI/CD", "Linux", "Jupyter", "VS Code"],
+    skills: [
+      "Git",
+      "GitHub",
+      "Docker",
+      "Airflow",
+      "CI/CD",
+      "Linux",
+      "Jupyter",
+      "VS Code",
+    ],
   },
   {
     title: "Concepts",
     icon: "⚙️",
-    skills: ["Machine Learning", "Deep Learning", "NLP", "RAG", "Vector Search", "Embeddings", "ETL Pipelines", "A/B Testing", "Model Evaluation", "Feature Engineering"],
+    skills: [
+      "Machine Learning",
+      "Deep Learning",
+      "NLP",
+      "RAG",
+      "Vector Search",
+      "Embeddings",
+      "ETL Pipelines",
+      "A/B Testing",
+      "Model Evaluation",
+      "Feature Engineering",
+    ],
   },
   {
     title: "Relevant Coursework",
     icon: "🎓",
-    skills: ["Machine Learning", "Statistical Learning", "Data Mining", "Database Systems", "Probability & Statistics", "Optimization", "Data Visualization", "Time Series Analysis"],
+    skills: [
+      "Machine Learning",
+      "Statistical Learning",
+      "Data Mining",
+      "Database Systems",
+      "Probability & Statistics",
+      "Optimization",
+      "Data Visualization",
+      "Time Series Analysis",
+    ],
   },
 ];
 
@@ -128,9 +191,9 @@ const featuredProjects = [
     status: "Public",
     tech: "Python, Retrieval Evaluation, Google CSE, DuckDuckGo, Statistical Diagnostics",
     description:
-      "Built a reproducible framework to evaluate whether search rankings remain stable under meaning-preserving rewrites. Designed deterministic execution, cached artifacts, True-PIR metrics, focal-item tracking, and bias diagnostics for credible cross-engine comparison.",
+      "Designed a reproducible evaluation system to measure ranking robustness under semantic-preserving query perturbations. Implemented deterministic pipelines, cached artifacts, True-PIR metrics, and bias diagnostics to systematically analyze retrieval stability across search engines.",
     impact:
-      "Measured engine robustness with Mean PIR scores of 0.625 for Google and 0.586 for DuckDuckGo, surfacing ranking instability under paraphrased queries.",
+      "Benchmarked cross-engine robustness at scale, revealing measurable ranking instability (Mean PIR: Google 0.625 vs DuckDuckGo 0.586) and enabling deeper analysis of semantic drift and bias in retrieval systems.",
     github: "https://github.com/kashishlalwani13/pirpb",
     linkLabel: "GitHub",
     secondaryLink:
@@ -143,11 +206,14 @@ const featuredProjects = [
     status: "Public",
     tech: "Python, FAISS, Vector Embeddings, NumPy",
     description:
-      "Built dense embedding and FAISS indexing pipelines simulating large-scale retrieval workloads from 10K to 50K chunks. Profiled indexing efficiency, p50/p95 latency, and throughput to evaluate scaling trade-offs.",
+      "Built a scalable retrieval benchmarking system using FAISS and dense embeddings to simulate production-scale workloads (10K–50K chunks). Evaluated indexing efficiency, latency distributions (p50/p95), and throughput under increasing data load.",
     impact:
-      "Created a benchmark framework for retrieval bottleneck analysis and system optimization under realistic scaling constraints.",
+      "Identified key bottlenecks in retrieval pipelines and demonstrated how indexing strategy and memory optimization outperform brute-force model scaling for real-world systems.",
     github: "https://github.com/garima24112000/Scaling-Retrieval-System",
     linkLabel: "GitHub",
+    secondaryLink:
+      "https://medium.com/@kaashishlalwani/scaling-retrieval-systems-why-smarter-memory-might-beat-bigger-ai-models-f7f78c3db267",
+    secondaryLabel: "Article",
   },
   {
     title: "AI-Enhanced Portfolio Management System",
@@ -155,11 +221,13 @@ const featuredProjects = [
     status: "Public",
     tech: "Python, cvxpy, Pandas, Risk Modeling, CVaR",
     description:
-      "Developed a risk-aware capital allocation engine using CVaR optimization and adaptive volatility forecasting for public equity portfolios.",
+      "Developed a risk-aware portfolio optimization engine using CVaR-based modeling and adaptive volatility forecasting for dynamic asset allocation.",
     impact:
-      "Improved Sharpe ratio by 15% and reduced downside risk by 28% in simulated downturns, while enabling faster rebalancing decisions.",
+      "Improved risk-adjusted returns (Sharpe +15%) and reduced downside risk by 28%, demonstrating practical application of quantitative finance and ML-driven decision systems.",
     github: "https://github.com/kashishlalwani13/AI-Portfolio-Management",
     linkLabel: "GitHub",
+    secondaryLink: "",
+    secondaryLabel: "",
   },
 ];
 
@@ -202,8 +270,16 @@ const writing = [
     title: "Same Question, Different Words — Do Search Rankings Stay Stable?",
     type: "Medium Article",
     description:
-      "A technical write-up of the PIR / PB framework for measuring ranking robustness under paraphrased search queries.",
+      "Explores ranking robustness using PIR / PB metrics, highlighting how semantic variations impact retrieval stability and system reliability.",
     link: "https://medium.com/@kaashishlalwani/same-question-different-words-do-search-rankings-stay-stable-2bf28c07cf20",
+  },
+  {
+    title:
+      "Scaling Retrieval Systems: Why Smarter Memory Might Beat Bigger AI Models",
+    type: "Medium Article",
+    description:
+      "Analyzes scaling trade-offs in retrieval systems, covering embedding strategies, FAISS indexing, latency bottlenecks, and system-level optimization over brute-force model scaling.",
+    link: "https://medium.com/@kaashishlalwani/scaling-retrieval-systems-why-smarter-memory-might-beat-bigger-ai-models-f7f78c3db267",
   },
 ];
 
@@ -394,6 +470,11 @@ export default function Home() {
             retrieval pipelines, experimentation infrastructure, and
             finance-oriented analytics products that turn complex data into
             measurable decision advantage.
+          </p>
+
+          <p className="mb-4 max-w-2xl text-lg leading-8 text-neutral-400">
+            Building production-grade ML systems, retrieval infrastructure, and
+            data-driven decision engines at scale.
           </p>
 
           <p className="mb-6 max-w-2xl text-base italic leading-7 text-[#cdb792] md:text-lg">
@@ -617,11 +698,14 @@ export default function Home() {
                 </p>
                 <span
                   className={`rounded-full px-3 py-1 text-xs uppercase tracking-[0.16em] ${project.status === "Public"
-                    ? "border border-emerald-400/20 bg-emerald-400/10 text-emerald-200"
-                    : "border border-amber-400/20 bg-amber-400/10 text-amber-200"
+                      ? "border border-emerald-400/20 bg-emerald-400/10 text-emerald-200"
+                      : "border border-amber-400/20 bg-amber-400/10 text-amber-200"
                     }`}
                 >
                   {project.status}
+                </span>
+                <span className="rounded-full border border-[#c6a972]/20 bg-[#c6a972]/10 px-3 py-1 text-xs uppercase tracking-[0.16em] text-[#eadfcd]">
+                  Reproducible · Scalable · Evaluation-Driven
                 </span>
               </div>
 
@@ -681,8 +765,8 @@ export default function Home() {
                   </h3>
                   <span
                     className={`rounded-full px-3 py-1 text-xs uppercase tracking-[0.16em] ${project.status === "Public"
-                      ? "border border-emerald-400/20 bg-emerald-400/10 text-emerald-200"
-                      : "border border-amber-400/20 bg-amber-400/10 text-amber-200"
+                        ? "border border-emerald-400/20 bg-emerald-400/10 text-emerald-200"
+                        : "border border-amber-400/20 bg-amber-400/10 text-amber-200"
                       }`}
                   >
                     {project.status}
@@ -760,13 +844,13 @@ export default function Home() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
-          {Object.entries(skills).map(([category, items]) => (
-            <div key={category} className={interactiveCardClass}>
+          {skills.map((category) => (
+            <div key={category.title} className={interactiveCardClass}>
               <h3 className="mb-5 text-xl font-semibold text-[#f5efe6]">
-                {category}
+                {category.icon} {category.title}
               </h3>
               <div className="flex flex-wrap gap-3">
-                {items.map((item) => (
+                {category.skills.map((item) => (
                   <span key={item} className={chipClass}>
                     {item}
                   </span>
@@ -1083,8 +1167,8 @@ export default function Home() {
                         </p>
                         <span
                           className={`rounded-full px-3 py-1 text-xs uppercase tracking-[0.16em] ${project.status === "Public"
-                            ? "border border-emerald-400/20 bg-emerald-400/10 text-emerald-200"
-                            : "border border-amber-400/20 bg-amber-400/10 text-amber-200"
+                              ? "border border-emerald-400/20 bg-emerald-400/10 text-emerald-200"
+                              : "border border-amber-400/20 bg-amber-400/10 text-amber-200"
                             }`}
                         >
                           {project.status}
