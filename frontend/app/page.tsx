@@ -393,17 +393,17 @@ export default function Home() {
       {/* Nav */}
       <nav className="sticky top-0 z-50 border-b border-white/10 bg-[#0a0a0a]/85 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <a href="#top" className="text-lg font-semibold tracking-wide text-[#c6a972] transition-opacity duration-300 hover:opacity-90">
+          <a ="#top" className="text-lg font-semibold tracking-wide text-[#c6a972] transition-opacity duration-300 hover:opacity-90">
             Kashish Lalwani
           </a>
           <div className="hidden items-center gap-6 text-sm text-[#d8d0c4] lg:flex">
-            <a href="#about" className={navLinkClass}>About</a>
-            <a href="#experience" className={navLinkClass}>Experience</a>
-            <a href="#projects" className={navLinkClass}>Projects</a>
-            <a href="#toolkit" className={navLinkClass}>Toolkit</a>
-            <a href="#writing" className={navLinkClass}>Writing</a>
-            <a href="#awards" className={navLinkClass}>Awards</a>
-            <a href="#contact" className={navLinkClass}>Contact</a>
+            <a ="#about" className={navLinkClass}>About</a>
+            <a ="#experience" className={navLinkClass}>Experience</a>
+            <a ="#projects" className={navLinkClass}>Projects</a>
+            <a ="#toolkit" className={navLinkClass}>Toolkit</a>
+            <a ="#writing" className={navLinkClass}>Writing</a>
+            <a ="#awards" className={navLinkClass}>Awards</a>
+            <a ="#contact" className={navLinkClass}>Contact</a>
           </div>
           <div className="flex items-center gap-3">
             <a href="/Kashish_Resume.pdf" target="_blank" rel="noreferrer"
