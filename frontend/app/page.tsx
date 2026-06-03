@@ -406,7 +406,7 @@ export default function Home() {
             <a href="#contact" className={navLinkClass}>Contact</a>
           </div>
           <div className="flex items-center gap-3">
-            <a href="/Kashish_Lalwani_Resume.pdf" target="_blank" rel="noreferrer"
+            <a href="/Kashish_Resume.pdf" target="_blank" rel="noreferrer"
               className="hidden rounded-full border border-white/20 px-4 py-2 text-sm text-[#f5efe6] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#c6a972] hover:text-[#c6a972] sm:inline-flex">
               Resume
             </a>
@@ -450,7 +450,7 @@ export default function Home() {
           <div className="flex flex-wrap gap-4">
             <a href="https://github.com/kashishlalwani13" target="_blank" rel="noreferrer" className={primaryButtonClass}>GitHub</a>
             <a href="https://linkedin.com/in/kashishlalwani13" target="_blank" rel="noreferrer" className={secondaryButtonClass}>LinkedIn</a>
-            <a href="/Kashish_Lalwani_Resume.pdf" target="_blank" rel="noreferrer" className={secondaryButtonClass}>Resume</a>
+            <a href="/Kashish_Resume.pdf" target="_blank" rel="noreferrer" className={secondaryButtonClass}>Resume</a>
           </div>
           <div className="mt-10 grid max-w-2xl grid-cols-1 gap-4 text-sm text-[#b8afa1] md:grid-cols-3">
             <div className={statCardClass}>
