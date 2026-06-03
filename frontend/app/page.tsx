@@ -45,7 +45,7 @@ const experiences = [
   },
   {
     role: "Founding AI Engineer",
-    company: "Versaunt (Aayats), Inc.",
+    company: "Versaunt (fka. Aayats), Inc.",
     location: "USA",
     period: "May 2025 to Aug 2025",
     type: "ML Systems · Product Analytics · Experimentation Infrastructure",
@@ -58,7 +58,7 @@ const experiences = [
     ],
   },
   {
-    role: "Data Analyst Intern",
+    role: "Data Analyst",
     company: "Saroj Group of Companies",
     location: "India",
     period: "Jan 2024 to Jul 2024",
@@ -70,11 +70,11 @@ const experiences = [
     ],
   },
   {
-    role: "Data Analyst Intern",
+    role: "Data Analyst",
     company: "Kamala Plastics",
     location: "India",
     period: "Jul 2023 to Dec 2023",
-    type: "ETL · KPI Reporting · Operational Analytics",
+    type: "ETL · KPI Reporting · Operational Analytics · Data Quality ",
     bullets: [
       "Built ETL workflows integrating 200K+ records to improve reporting consistency and operational visibility.",
       "Used SQL and Python analysis to identify trends that improved operational performance by 17%.",
@@ -427,7 +427,7 @@ export default function Home() {
 
         <div>
           <p className="mb-4 text-sm uppercase tracking-[0.3em] text-[#c6a972]">
-            Data Scientist · Applied AI · Product Analytics · Systems
+            Systems AI Engineer · Applied Data Scientist · Analytics · ML Systems
           </p>
           <h1 className="mb-6 text-5xl font-bold leading-tight md:text-7xl">
             Kashish
@@ -723,7 +723,7 @@ export default function Home() {
         <div className="rounded-[2rem] border border-[#c6a972]/20 bg-[#121212] p-10 transition-all duration-300 hover:-translate-y-1 hover:border-[#c6a972]/35 hover:shadow-2xl">
           <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[#c6a972]">Contact</p>
           <h2 className="mb-4 text-3xl font-semibold md:text-4xl">
-            Open to Data Scientist, ML Engineer, and Applied AI opportunities
+            Open to Data Scientist, ML Engineer, Applied AI, and Analytics roles.
           </h2>
           <p className="mb-8 max-w-3xl text-lg leading-8 text-[#d8d0c4]">
             I am especially interested in roles where machine learning, analytics, experimentation, and systems execution come together to shape product performance and business decisions.
