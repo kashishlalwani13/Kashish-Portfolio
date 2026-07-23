@@ -503,7 +503,7 @@ export default function Home() {
         <div className="grid gap-8 md:grid-cols-2">
           <div className={interactiveCardClass}>
             <p className="text-lg leading-8 text-[#d8d0c4]">
-              I am currently pursuing my Master's in Data Science at Stony Brook University. I build systems that connect business questions to data pipelines, analytics, machine learning, and production execution. My strongest work happens where technical depth must translate into measurable product or operational impact.
+              I'm MS DS Grad (Stony Brook'26) . I build systems that connect business questions to data pipelines, analytics, machine learning, and production execution. My strongest work happens where technical depth must translate into measurable product or operational impact.
             </p>
           </div>
           <div className={interactiveCardClass}>
