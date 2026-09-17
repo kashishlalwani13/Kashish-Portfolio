@@ -30,6 +30,17 @@ const education = [
 
 const experiences = [
   {
+    role: "Research Assistant",
+    company: "CUBIT Lab, Stony Brook University",
+    location: "USA",
+    period: "Aug 2026 to Present",
+    type: "Data Quality · Inter-Rater Agreement Systems · Research Infrastructure",
+    bullets: [
+      "Architecting an inter-rater agreement system to quantify reviewer consensus on actigraphy QC data.",
+      "Contributing to a QC dashboard combining reviewer ratings, summary statistics, and flags for mood-and-sleep research pipelines.",
+    ],
+  },
+  {
     role: "Data Scientist",
     company: "Stony Brook University",
     location: "USA",
@@ -81,6 +92,20 @@ const experiences = [
       "Developed KPI dashboards and root-cause analyses that reduced scrap by 22% and returns by 15%.",
     ],
   },
+  {
+    role: "Research Assistant",
+    company: "Dept. of Artificial Intelligence & Machine Learning, D.Y. Patil College of Engineering & Technology",
+    location: "India",
+    period: "Sep 2022 to May 2024",
+    type: "Applied AI/ML Research · Cybersecurity · Computer Vision · Mentorship",
+    bullets: [
+      "Developed an LSB-based image steganography method for secure communication, improving concealment effectiveness by 40%.",
+      "Built a YOLOv4 real-time object detection system reaching 95% accuracy at 30+ FPS for smart surveillance applications.",
+      "Led a parallel research track producing a Smart India Hackathon–selected RAG platform (LangChain, FAISS, pgvector) for a national government client.",
+      "Built a CNN-based malaria diagnostic tool achieving 92% accuracy, reducing diagnostic time by 65%.",
+      "Mentored peers on AI/ML research as Head of R&D and Research Mentor for the AIML Students Association.",
+    ],
+  },
 ];
 
 const featuredProjects = [
@@ -127,7 +152,7 @@ const featuredProjects = [
     hosted: "",
   },
   {
-    title: "AI-Enhanced Portfolio Management System",
+    title: "AI Portfolio Risk & Forecasting Model",
     tag: "Finance + ML · Featured",
     status: "Public",
     tech: "Python, CVaR, Pandas, Optimization, Risk Modeling",
@@ -155,7 +180,7 @@ const selectedProjects = [
     note: "Confidential project. Repository unavailable due to IP constraints.",
   },
   {
-    title: "Formula 1 Performance Analytics",
+    title: "Formula 1 Performance Intelligence System",
     tech: "Python, XGBoost, Regression, Clustering, Statistical Testing",
     description:
       "Built predictive and clustering models on 150K+ lap records for lap time estimation, driver segmentation, and race strategy analysis.",
@@ -179,7 +204,7 @@ const selectedProjects = [
         url: "https://medium.com/@kaashishlalwani/7-years-thats-how-long-rare-disease-patients-wait-for-a-correct-diagnosis-b15b775ca801",
       },
     ],
-    note: "In progress · Harvard HackRare project",
+    note: "Harvard HackRare 2026 · Finalist",
   },
 ];
 
@@ -205,7 +230,9 @@ const toolkit = [
       "Embeddings",
       "Vector Search",
       "FAISS",
+      "pgvector",
       "LangChain",
+      "LangGraph",
       "spaCy",
       "negspacy",
       "Clinical NLP",
@@ -258,6 +285,11 @@ const toolkit = [
       "Power BI",
       "Looker",
     ],
+  },
+  {
+    title: "AI-Assisted Development",
+    icon: "🤖",
+    items: ["Claude", "Claude Code", "ChatGPT/GPT", "Gemini", "GitHub Copilot"],
   },
 ];
 
@@ -323,6 +355,13 @@ const awards = [
     year: "Dec 2023",
     description:
       "Finalist among Top 3 teams for Ministry of Power in SIH 2023 Senior Software Edition, representing D. Y. Patil College of Engineering and Technology.",
+  },
+  {
+    title: "Harvard HackRare Finalist",
+    org: "Harvard HackRare 2026",
+    year: "Mar 2026",
+    description:
+      "Finalist for a clinical NLP pipeline mapping unstructured rare-disease notes to HPO, GA4GH, and FHIR interoperability standards.",
   },
   {
     title: "Best Emerging Rotaractor (Female)",
@@ -409,17 +448,17 @@ export default function Home() {
       {/* Nav */}
       <nav className="sticky top-0 z-50 border-b border-white/10 bg-[#0a0a0a]/85 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <a ="#top" className="text-lg font-semibold tracking-wide text-[#c6a972] transition-opacity duration-300 hover:opacity-90">
+          <a href="#top" className="text-lg font-semibold tracking-wide text-[#c6a972] transition-opacity duration-300 hover:opacity-90">
             Kashish Lalwani
           </a>
           <div className="hidden items-center gap-6 text-sm text-[#d8d0c4] lg:flex">
-            <a ="#about" className={navLinkClass}>About</a>
-            <a ="#experience" className={navLinkClass}>Experience</a>
-            <a ="#projects" className={navLinkClass}>Projects</a>
-            <a ="#toolkit" className={navLinkClass}>Toolkit</a>
-            <a ="#writing" className={navLinkClass}>Writing</a>
-            <a ="#awards" className={navLinkClass}>Awards</a>
-            <a ="#contact" className={navLinkClass}>Contact</a>
+            <a href="#about" className={navLinkClass}>About</a>
+            <a href="#experience" className={navLinkClass}>Experience</a>
+            <a href="#projects" className={navLinkClass}>Projects</a>
+            <a href="#toolkit" className={navLinkClass}>Toolkit</a>
+            <a href="#writing" className={navLinkClass}>Writing</a>
+            <a href="#awards" className={navLinkClass}>Awards</a>
+            <a href="#contact" className={navLinkClass}>Contact</a>
           </div>
           <div className="flex items-center gap-3">
             <a href="/Kashish_Resume.pdf" target="_blank" rel="noreferrer"
@@ -745,6 +784,14 @@ export default function Home() {
             I am especially interested in roles where machine learning, analytics, experimentation, and systems execution come together to shape product performance and business decisions.
           </p>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#c6a972]/30 hover:bg-white/[0.07]">
+              <p className="mb-2 text-sm uppercase tracking-[0.14em] text-[#c6a972]">Location</p>
+              <p className="text-[#f5efe6]">San Antonio, Texas, USA — Open to Relocation</p>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#c6a972]/30 hover:bg-white/[0.07]">
+              <p className="mb-2 text-sm uppercase tracking-[0.14em] text-[#c6a972]">Work Authorization</p>
+              <p className="text-[#f5efe6]">Authorized to work in the U.S. (EAD) — Available Immediately</p>
+            </div>
             <div className="rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#c6a972]/30 hover:bg-white/[0.07]">
               <p className="mb-2 text-sm uppercase tracking-[0.14em] text-[#c6a972]">Email</p>
               <a href="mailto:work.kashishlalwani@gmail.com" className="text-[#f5efe6] transition-colors duration-300 hover:text-[#c6a972]">
