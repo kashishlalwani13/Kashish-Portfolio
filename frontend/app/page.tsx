@@ -1,30 +1,51 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
+import { Cormorant_Garamond, Manrope } from "next/font/google";
+
+const display = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["500", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-display",
+});
+const body = Manrope({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-body",
+});
+
+/* Palette (from profile photo)
+   ivory   #f8f3ea  page background (roses, dress)
+   linen   #efe6d6  soft cards
+   espresso#2a1a12  text and dark bands (polka dots)
+   cocoa   #5b3a29  secondary text
+   caramel #8a5232  accent text on light (hair)
+   gold    #d4ab72  accent on dark (earrings)
+*/
 
 const focusAreas = [
-  "Applied AI and Machine Learning",
-  "Product Analytics and Experimentation",
-  "Retrieval and RAG Systems",
-  "Data Pipelines and Backend Execution",
-  "Decision Intelligence",
-  "Fintech and Real-Time Systems",
+  "Data Analytics",
+  "Reporting and Dashboards",
+  "Data Quality",
+  "Finance Analytics",
+  "Healthcare Data",
+  "Applied AI",
 ];
 
 const education = [
   {
     school: "Stony Brook University",
     degree: "Master of Science in Data Science",
-    location: "Stony Brook, New York, USA",
     period: "Aug 2024 to May 2026",
     note: "",
   },
   {
     school: "Shivaji University",
     degree: "B.Tech in Computer Science (AI and ML)",
-    location: "Maharashtra, India",
     period: "Aug 2020 to May 2024",
-    note: "Honors: Best Outgoing Student — University Distinction",
+    note: "Best Outgoing Student (sole recipient)",
   },
 ];
 
@@ -34,24 +55,20 @@ const experiences = [
     company: "CUBIT Lab, Stony Brook University",
     location: "USA",
     period: "Aug 2026 to Present",
-    type: "Data Quality · Inter-Rater Agreement Systems · Research Infrastructure",
-    bullets: [
-      "Architecting an inter-rater agreement system to quantify reviewer consensus on actigraphy QC data.",
-      "Contributing to a QC dashboard combining reviewer ratings, summary statistics, and flags for mood-and-sleep research pipelines.",
-    ],
+    type: "Research Data · Data Quality",
+    bullets: ["Quality-control dashboard for health research data (actigraphy)."],
   },
   {
     role: "Data Scientist",
     company: "Stony Brook University",
     location: "USA",
     period: "Aug 2025 to Dec 2025",
-    type: "Retrieval Systems · ML Evaluation · Statistical Analysis",
+    type: "Evaluation · Statistical Analysis · Monitoring",
     bullets: [
-      "Built deterministic ML evaluation pipelines across 1M+ records and 100K+ queries to benchmark robustness in retrieval systems.",
-      "Designed reproducible cross-engine workflows with cached artifacts, validation logic, and statistical testing to improve metric reliability.",
-      "Implemented True-PIR evaluation and bias diagnostics to surface semantic drift, ranking instability, and retrieval performance risks.",
-      "Automated audit and reporting workflows to reduce manual analysis overhead and improve decision confidence.",
-      "Profiled latency, throughput, and scaling bottlenecks to guide system optimization under production-style workloads.",
+      "Built SQL and Python pipelines over 1M+ records and 100K+ queries to evaluate a retrieval system.",
+      "Designed True-PIR metrics and bias checks to measure how stable search rankings stay.",
+      "Used root-cause and statistical analysis to explain where and why results changed.",
+      "Set up monitoring for latency and throughput, plus validation and audit checks.",
     ],
   },
   {
@@ -59,13 +76,12 @@ const experiences = [
     company: "Versaunt (fka. Aayats), Inc.",
     location: "USA",
     period: "May 2025 to Aug 2025",
-    type: "ML Systems · Product Analytics · Experimentation Infrastructure",
+    type: "Product Analytics · Experimentation · Quality",
     bullets: [
-      "Built and productionized AI workflows supporting 10K+ users and 500K+ monthly queries across product-facing systems.",
-      "Designed experimentation infrastructure processing 50K+ daily events to evaluate model behavior, releases, and user engagement.",
-      "Built behavioral feature pipelines across 1M+ interaction records to strengthen evaluation quality and product insight generation.",
-      "Owned KPI dashboards and analytics workflows that informed roadmap prioritization and release validation decisions.",
-      "Integrated inference pipelines with monitoring to detect degradation patterns and improve production stability.",
+      "Owned analytics, quality and monitoring at a small AI startup.",
+      "Ran A/B tests and cohort analysis across 50K+ daily events.",
+      "Built dashboards to track a platform at 10K+ users and 500K+ queries.",
+      "Shipped a few small features. The engineering team built the core backend.",
     ],
   },
   {
@@ -73,11 +89,12 @@ const experiences = [
     company: "Saroj Group of Companies",
     location: "India",
     period: "Jan 2024 to Jul 2024",
-    type: "Operational Analytics · Forecasting · Decision Support",
+    type: "Finance Reporting · Forecasting · Automation",
     bullets: [
-      "Reduced defect rate by 40% using statistical modeling on 100K+ records, generating $50K in annual savings through process optimization.",
-      "Improved profit margin by 12% by identifying cost leakage and operational inefficiencies through SQL and Python analysis.",
-      "Automated reporting pipelines eliminating 25+ manual hours per month and improving data reliability for planning and operations.",
+      "Used statistical modeling on 100K+ records to help cut defect rates by 40%.",
+      "Ran forecasting and cost scenario analysis that supported a 12% margin gain.",
+      "Built KPI dashboards in SQL, Excel and Tableau, cutting reporting time by 35%.",
+      "Automated four Python and SQL reporting pipelines, saving 25+ hours a month.",
     ],
   },
   {
@@ -85,388 +102,268 @@ const experiences = [
     company: "Kamala Plastics",
     location: "India",
     period: "Jul 2023 to Dec 2023",
-    type: "ETL · KPI Reporting · Operational Analytics · Data Quality ",
+    type: "ETL · Reconciliation · Operations Analytics",
     bullets: [
-      "Built ETL workflows integrating 200K+ records to improve reporting consistency and operational visibility.",
-      "Used SQL and Python analysis to identify trends that improved operational performance by 17%.",
-      "Developed KPI dashboards and root-cause analyses that reduced scrap by 22% and returns by 15%.",
+      "Built ETL pipelines that brought 200K+ records from systems that named machines differently under one standard.",
+      "Validated and reconciled the data so counts and totals matched across reports.",
+      "Ran root-cause analysis that gave engineering the evidence to cut scrap by 22% and returns by 15%.",
     ],
   },
   {
     role: "Research Assistant",
-    company: "Dept. of Artificial Intelligence & Machine Learning, D.Y. Patil College of Engineering & Technology",
+    company: "Dept. of AI and ML, D.Y. Patil College of Engineering and Technology",
     location: "India",
     period: "Sep 2022 to May 2024",
-    type: "Applied AI/ML Research · Cybersecurity · Computer Vision · Mentorship",
+    type: "Applied AI Research · Mentorship",
     bullets: [
-      "Developed an LSB-based image steganography method for secure communication, improving concealment effectiveness by 40%.",
-      "Built a YOLOv4 real-time object detection system reaching 95% accuracy at 30+ FPS for smart surveillance applications.",
-      "Led a parallel research track producing a Smart India Hackathon–selected RAG platform (LangChain, FAISS, pgvector) for a national government client.",
-      "Built a CNN-based malaria diagnostic tool achieving 92% accuracy, reducing diagnostic time by 65%.",
-      "Mentored peers on AI/ML research as Head of R&D and Research Mentor for the AIML Students Association.",
+      "Built a CNN-based malaria diagnostic tool that reached 92% accuracy and cut diagnostic time by 65%.",
+      "Built a YOLOv4 object detection system with 95% accuracy at 30+ FPS.",
+      "Developed an LSB image steganography method that improved concealment by 40%.",
+      "Led the research track behind a Smart India Hackathon RAG platform for a national government client.",
+      "Mentored peers as Head of R&D for the AIML Students Association.",
     ],
   },
 ];
 
-const featuredProjects = [
+type Project = {
+  title: string;
+  group: string;
+  tags: string[];
+  headline: string;
+  problem: string;
+  did: string;
+  tools: string;
+  result: string;
+  learned: string;
+  github?: string;
+  hosted?: string;
+  article?: string;
+  note?: string;
+};
+
+const projects: Project[] = [
   {
-    title: "Aegis: Cost-Aware Real-Time Fraud Detection System",
-    tag: "ML Systems · Featured",
-    status: "Public",
-    tech: "Python, PySpark, Databricks, XGBoost, Random Forest, Streaming, Drift Detection",
-    description:
-      "End-to-end fraud detection pipeline built on PySpark and Databricks, simulating a production-grade system with streaming ingestion, ML classification, cost-based decision logic, drift monitoring, and threshold optimization.",
-    impact:
-      "Achieved F1 of 0.9942 and AUC of 0.993 on highly imbalanced data (0.138% fraud rate). Cost-optimal threshold reduced financial exposure by $19.4M+ versus a naive threshold. Drift detection validated via controlled injection with PSI and KS metrics.",
-    github: "https://github.com/kashishlalwani13/aegis-fraud-detection",
-    article: "https://medium.com/@kaashishlalwani/the-threshold-is-a-business-decision-not-a-statistical-one-db6ab69efa0b",
-    articleComingSoon: false,
-    hosted: "https://kashishlalwani13.github.io/aegis-fraud-detection/",
+    title: "AI Portfolio Risk and Forecasting Model",
+    group: "Finance and business analytics",
+    tags: ["Finance", "Analytics"],
+    headline: "Sharpe +15% · downside risk −28%",
+    problem: "Return alone does not show how bad the bad days can get.",
+    did: "Built forecasting models and a CVaR-based optimization to balance return against downside risk.",
+    tools: "Python, XGBoost, CVaR, Pandas",
+    result: "Sharpe ratio up 15% and downside risk down 28%.",
+    learned: "Planning for the worst case changes which choice looks best.",
+    github: "https://github.com/kashishlalwani13/AI-Portfolio-Management",
   },
   {
-    title: "Search Perturbation Robustness and Bias (PIR / PB)",
-    tag: "Research · Featured",
-    status: "Public",
-    tech: "Python, Retrieval Evaluation, Statistical Diagnostics, Google CSE, DuckDuckGo",
-    description:
-      "Designed a reproducible evaluation system to measure ranking robustness under semantic-preserving query perturbations. Built deterministic pipelines, cached artifacts, True-PIR metrics, and bias diagnostics to systematically analyze retrieval stability.",
-    impact:
-      "Benchmarked cross-engine robustness at scale and surfaced measurable ranking instability, enabling deeper analysis of semantic drift and bias in retrieval systems.",
+    title: "Aegis: Cost-Aware Fraud Detection",
+    group: "Finance and business analytics",
+    tags: ["Finance", "AI"],
+    headline: "F1 0.9942 · ~$19.4M modeled",
+    problem: "Blocking too many payments hurts good customers. Blocking too few costs money. The cut-off is a business decision.",
+    did: "Built a fraud pipeline on PySpark and Databricks, picked the threshold by cost, and added drift detection to catch when data changes.",
+    tools: "Python, PySpark, Databricks, MLflow, XGBoost, drift detection",
+    result: "F1 0.9942 and AUC 0.993 on test data. About $19.4M in reduced exposure, as a modeled estimate.",
+    learned: "The best threshold depends on what each mistake costs.",
+    github: "https://github.com/kashishlalwani13/aegis-fraud-detection",
+    hosted: "https://kashishlalwani13.github.io/aegis-fraud-detection/",
+    article: "https://medium.com/@kaashishlalwani/the-threshold-is-a-business-decision-not-a-statistical-one-db6ab69efa0b",
+  },
+  {
+    title: "Formula 1 Performance Analytics",
+    group: "Finance and business analytics",
+    tags: ["Analytics"],
+    headline: "150K+ records · 20+ KPIs",
+    problem: "Raw race telemetry is too dense to compare drivers and races directly.",
+    did: "Built a SQL analytics layer over 150K+ telemetry records and tracked 20+ KPIs in Tableau.",
+    tools: "SQL, Python, Tableau",
+    result: "A clear view of performance gaps and trends across races.",
+    learned: "Picking the right KPIs is most of the work.",
+    github: "https://github.com/kashishlalwani13/Formula1-Performance-Analytics",
+  },
+  {
+    title: "Search Ranking Stability (PIR / PB)",
+    group: "Data quality and evaluation",
+    tags: ["Analytics"],
+    headline: "Cross-engine stability benchmark",
+    problem: "Search rankings can shift when the same question is worded differently, and there was no clean way to measure it.",
+    did: "Built repeatable pipelines with cached results, designed True-PIR metrics and bias checks, and compared search engines.",
+    tools: "Python, statistical testing, Google CSE, DuckDuckGo",
+    result: "Measured real ranking instability across engines, with a method others can rerun and audit.",
+    learned: "A metric is only useful if someone else can reproduce it.",
     github: "https://github.com/kashishlalwani13/pirpb",
     article: "https://medium.com/@kaashishlalwani/same-question-different-words-do-search-rankings-stay-stable-2bf28c07cf20",
-    articleComingSoon: false,
-    hosted: "",
   },
   {
-    title: "Scalable Retrieval Benchmarking for RAG Systems",
-    tag: "ML Systems · Featured",
-    status: "Public",
-    tech: "Python, FAISS, Vector Embeddings, NumPy",
-    description:
-      "Built a scalable retrieval benchmarking system using FAISS and dense embeddings to simulate production-scale workloads and evaluate indexing efficiency, latency distributions, and throughput under rising data load.",
-    impact:
-      "Identified key bottlenecks in retrieval pipelines and demonstrated how better indexing and memory strategy can outperform brute-force model scaling.",
+    title: "Clinical Notes to Structured Data",
+    group: "Health data",
+    tags: ["Healthcare", "AI"],
+    headline: "Harvard HackRare 2026 · Finalist",
+    problem: "Rare disease notes mix what a patient has with what they do not. A note that says \"no seizures\" must not count as seizures.",
+    did: "Built an NLP pipeline that finds negated and uncertain symptoms and maps findings to HPO and GA4GH standards.",
+    tools: "Python, spaCy, negspacy, HPO, GA4GH, Streamlit",
+    result: "Finalist at Harvard HackRare 2026.",
+    learned: "In health data, what is absent matters as much as what is present.",
+    github: "https://github.com/kashishlalwani13/Structured-Clinical-Data-Pipeline-",
+    article: "https://medium.com/@kaashishlalwani/7-years-thats-how-long-rare-disease-patients-wait-for-a-correct-diagnosis-b15b775ca801",
+  },
+  {
+    title: "RAG Financial Intelligence Platform",
+    group: "Applied AI and ML",
+    tags: ["Finance", "AI"],
+    headline: "Latency −60% · decision efficiency +40%",
+    problem: "Analysts spent too long finding answers across large sets of financial documents.",
+    did: "Built a retrieval approach that finds the relevant passages and passes them to a language model to answer questions.",
+    tools: "Python, LLMs, LangChain, vector search, ETL",
+    result: "Response latency down 60% and decision efficiency up 40%.",
+    learned: "Clean, well-organized source data matters more than the model.",
+    note: "Confidential government client. I can share the approach only.",
+  },
+  {
+    title: "Scalable Retrieval Benchmarking",
+    group: "Applied AI and ML",
+    tags: ["AI"],
+    headline: "Indexing vs. brute-force scaling",
+    problem: "Retrieval systems slow down as data grows, and it was unclear where the bottleneck was.",
+    did: "Built a FAISS benchmark that simulated growing workloads and measured latency, throughput and indexing efficiency.",
+    tools: "Python, FAISS, vector embeddings, NumPy",
+    result: "Found the bottlenecks and showed that better indexing can beat simply scaling up.",
+    learned: "Measure before you scale.",
     github: "https://github.com/garima24112000/Scaling-Retrieval-System",
     article: "https://medium.com/@kaashishlalwani/scaling-retrieval-systems-why-smarter-memory-might-beat-bigger-ai-models-f7f78c3db267",
-    articleComingSoon: false,
-    hosted: "",
-  },
-  {
-    title: "AI Portfolio Risk & Forecasting Model",
-    tag: "Finance + ML · Featured",
-    status: "Public",
-    tech: "Python, CVaR, Pandas, Optimization, Risk Modeling",
-    description:
-      "Built a risk-aware portfolio optimization engine using CVaR-based modeling and adaptive forecasting to support dynamic allocation decisions.",
-    impact:
-      "Improved Sharpe ratio by 15% and reduced downside risk by 28%, demonstrating practical use of ML and optimization in financial decision systems.",
-    github: "https://github.com/kashishlalwani13/AI-Portfolio-Management",
-    article: "",
-    articleComingSoon: false,
-    hosted: "",
   },
 ];
 
-const selectedProjects = [
-  {
-    title: "RAG Financial Intelligence Platform",
-    tech: "LLMs, LangChain, Retrieval, Financial Document Analysis",
-    description:
-      "Built an AI-powered financial intelligence platform for due diligence across 20+ document types, combining retrieval, summarization, and structured analysis workflows.",
-    impact:
-      "Reduced analysis time by 60% and improved decision efficiency by 40% for investment-oriented workflows.",
-    github: "",
-    articles: [],
-    note: "Confidential project. Repository unavailable due to IP constraints.",
-  },
-  {
-    title: "Formula 1 Performance Intelligence System",
-    tech: "Python, XGBoost, Regression, Clustering, Statistical Testing",
-    description:
-      "Built predictive and clustering models on 150K+ lap records for lap time estimation, driver segmentation, and race strategy analysis.",
-    impact:
-      "Turned high-volume telemetry into interpretable performance insights and decision-support analytics.",
-    github: "https://github.com/kashishlalwani13/Formula1-Performance-Analytics",
-    articles: [],
-    note: "",
-  },
-  {
-    title: "Clinical Phenotype Extraction Pipeline",
-    tech: "Python, NLP, spaCy, negspacy, HPO, Streamlit",
-    description:
-      "Modular NLP pipeline converting unstructured clinical notes into structured phenotype outputs for clinical analytics and rare disease workflows. Built as part of Harvard HackRare.",
-    impact:
-      "Focuses on context-aware extraction, ontology mapping, and evaluation-first design for decision-useful clinical data.",
-    github: "https://github.com/kashishlalwani13/Structured-Clinical-Data-Pipeline-",
-    articles: [
-      {
-        label: "Article",
-        url: "https://medium.com/@kaashishlalwani/7-years-thats-how-long-rare-disease-patients-wait-for-a-correct-diagnosis-b15b775ca801",
-      },
-    ],
-    note: "Harvard HackRare 2026 · Finalist",
-  },
+const filters = ["All", "Analytics", "Finance", "Healthcare", "AI"];
+const groups = [
+  "Finance and business analytics",
+  "Data quality and evaluation",
+  "Health data",
+  "Applied AI and ML",
+];
+
+const habits = [
+  { title: "Check the data first", text: "I validate the data before anyone sees a chart." },
+  { title: "Make the numbers add up", text: "I reconcile counts and totals. If two sources disagree, I find out why." },
+  { title: "Write it down", text: "I document the work so others can reuse it without me." },
+  { title: "Say it plainly", text: "I explain results in plain language, with the decision up front." },
+  { title: "Flag risk early", text: "If something is at risk, I tell people early, while it is still easy to fix." },
 ];
 
 const toolkit = [
   {
-    title: "Languages and Data",
-    icon: "💻",
-    items: ["Python", "SQL", "R", "C", "PostgreSQL", "MySQL", "BigQuery", "Snowflake", "Pandas"],
+    title: "Analytics and BI",
+    items: ["SQL", "Excel", "Tableau", "Power BI", "KPI design", "A/B testing", "Cohort analysis", "Forecasting", "Root-cause analysis"],
   },
   {
-    title: "ML, AI and Retrieval",
-    icon: "🧠",
-    items: [
-      "PyTorch",
-      "TensorFlow",
-      "scikit-learn",
-      "XGBoost",
-      "Random Forest",
-      "Transformers",
-      "LLMs",
-      "RAG",
-      "Prompt Engineering",
-      "Embeddings",
-      "Vector Search",
-      "FAISS",
-      "pgvector",
-      "LangChain",
-      "LangGraph",
-      "spaCy",
-      "negspacy",
-      "Clinical NLP",
-      "Model Evaluation",
-      "Model Deployment",
-      "MLOps",
-      "Feature Engineering",
-      "Hyperparameter Tuning",
-      "Benchmarking",
-    ],
+    title: "Data Engineering",
+    items: ["Python", "Pandas", "ETL", "Data pipelines", "Data validation", "PostgreSQL", "PySpark", "Databricks"],
   },
   {
-    title: "Systems and Backend",
-    icon: "⚙️",
-    items: [
-      "FastAPI",
-      "REST APIs",
-      "ETL/ELT",
-      "PySpark",
-      "Databricks",
-      "MLflow",
-      "Docker",
-      "Airflow",
-      "CI/CD",
-      "AWS",
-      "Streaming Pipelines",
-      "Inference Optimization",
-      "Production Monitoring",
-    ],
-  },
-  {
-    title: "Analytics and Decisioning",
-    icon: "📊",
-    items: [
-      "A/B Testing",
-      "Experimentation",
-      "KPI Design",
-      "Cohort Analysis",
-      "Forecasting",
-      "Financial Forecasting",
-      "Root-Cause Analysis",
-      "Data Validation",
-      "Scenario Analysis",
-      "Drift Detection",
-      "Threshold Optimization",
-      "Statistical Testing",
-      "Data Storytelling",
-      "Excel",
-      "Tableau",
-      "Power BI",
-      "Looker",
-    ],
+    title: "AI and ML",
+    items: ["Predictive modeling", "Model evaluation", "XGBoost", "scikit-learn", "NLP (spaCy)", "Retrieval and RAG basics", "LangChain", "FAISS", "MLflow"],
   },
   {
     title: "AI-Assisted Development",
-    icon: "🤖",
-    items: ["Claude", "Claude Code", "ChatGPT/GPT", "Gemini", "GitHub Copilot"],
+    items: ["Claude", "Claude Code", "ChatGPT", "Gemini", "GitHub Copilot"],
   },
 ];
 
 const projectWriting = [
   {
     title: "The Threshold Is a Business Decision, Not a Statistical One",
-    type: "Project Article",
-    description:
-      "A deep dive into the Aegis fraud detection system and why choosing the right operating threshold matters more than model accuracy alone.",
+    description: "Why choosing the right cut-off in fraud detection matters more than accuracy alone.",
     link: "https://medium.com/@kaashishlalwani/the-threshold-is-a-business-decision-not-a-statistical-one-db6ab69efa0b",
   },
   {
-    title: "Scaling Retrieval Systems: Why Smarter Memory Might Beat Bigger AI Models",
-    type: "Project Article",
-    description:
-      "Covers indexing strategy, latency bottlenecks, and retrieval optimization from a system design perspective.",
-    link: "https://medium.com/@kaashishlalwani/scaling-retrieval-systems-why-smarter-memory-might-beat-bigger-ai-models-f7f78c3db267",
-  },
-  {
     title: "7 Years. That's How Long Rare Disease Patients Wait for a Correct Diagnosis.",
-    type: "Project Article",
-    description:
-      "On the rare disease diagnostic gap and why structured clinical data and NLP pipelines can change outcomes for patients.",
+    description: "On the rare disease diagnosis gap and how structured clinical data can help.",
     link: "https://medium.com/@kaashishlalwani/7-years-thats-how-long-rare-disease-patients-wait-for-a-correct-diagnosis-b15b775ca801",
   },
   {
-    title: "Same Question, Different Words — Do Search Rankings Stay Stable?",
-    type: "Project Article",
-    description:
-      "A systems-level look at ranking robustness, semantic perturbations, and why evaluation matters in retrieval.",
+    title: "Same Question, Different Words: Do Search Rankings Stay Stable?",
+    description: "Measuring how much rankings move when a question is reworded.",
     link: "https://medium.com/@kaashishlalwani/same-question-different-words-do-search-rankings-stay-stable-2bf28c07cf20",
+  },
+  {
+    title: "Scaling Retrieval Systems: Why Smarter Memory Might Beat Bigger AI Models",
+    description: "Indexing choices, latency bottlenecks and what to fix first.",
+    link: "https://medium.com/@kaashishlalwani/scaling-retrieval-systems-why-smarter-memory-might-beat-bigger-ai-models-f7f78c3db267",
   },
 ];
 
 const conceptWriting = [
   {
-    title: "You're Not Prompting AI — You're Controlling a Probabilistic System",
-    type: "Ideas and Concepts",
-    description:
-      "A mental model shift for working with LLMs: why thinking in distributions, not commands, changes everything.",
-    link: "https://medium.com/@kaashishlalwani/youre-not-prompting-ai-you-re-controlling-a-probabilistic-system-f53d06989fd3",
-  },
-  {
-    title: "They Made It Hard to Leave — I Wanted to Know Why",
-    type: "Ideas and Concepts",
-    description:
-      "A data-driven exploration of retention mechanics and behavioral design patterns that keep users engaged.",
+    title: "They Made It Hard to Leave. I Wanted to Know Why.",
+    description: "A data-driven look at the retention patterns that keep users around.",
     link: "https://medium.com/@kaashishlalwani/they-made-it-hard-to-leave-i-wanted-to-know-why-38146f534b66",
   },
-];
-
-const awards = [
   {
-    title: "Best Outgoing Student",
-    org: "D. Y. Patil College of Engineering and Technology",
-    year: "Feb 2024",
-    description:
-      "The only student awarded Best Outgoing Student in 2023-24 for 4 years of excellence across academics, research, technical work, co-curricular, sports, cultural, and leadership achievements.",
-  },
-  {
-    title: "Smart India Hackathon Finalist — Top 3",
-    org: "Smart India Hackathon 2023, Ministry of Power",
-    year: "Dec 2023",
-    description:
-      "Finalist among Top 3 teams for Ministry of Power in SIH 2023 Senior Software Edition, representing D. Y. Patil College of Engineering and Technology.",
-  },
-  {
-    title: "Harvard HackRare Finalist",
-    org: "Harvard HackRare 2026",
-    year: "Mar 2026",
-    description:
-      "Finalist for a clinical NLP pipeline mapping unstructured rare-disease notes to HPO, GA4GH, and FHIR interoperability standards.",
-  },
-  {
-    title: "Best Emerging Rotaractor (Female)",
-    org: "Rotary International District 3170",
-    year: "Jul 2024",
-    description:
-      "Recognized among 75+ clubs of Rotary International District 3170 for leadership, initiative, and community impact.",
-  },
-  {
-    title: "Secretary of the Year",
-    org: "RI District 3170, Kolhapur Zone",
-    year: "Jun 2024",
-    description:
-      "Best Secretary Award given among 12 clubs of Kolhapur Zone for outstanding coordination, planning, and community leadership.",
-  },
-  {
-    title: "Chess Championships — Multiple Titles",
-    org: "Shivaji University and D. Y. Patil College",
-    year: "2023 and 2024",
-    description:
-      "Winner of Shivaji University Lead College Women's Chess Tournament (2023 and 2024). Winner of Shivaji University Zonal Women's Chess Tournament (2023). Runner-up at National level Tech Symposium Chess Competition. Winner of ARPAN Sports Women's Rapid Chess Tournament (2024). College Chess Team Captain for 3 consecutive years.",
-  },
-  {
-    title: "Multi-Sport Achievements",
-    org: "Shivaji University",
-    year: "2023",
-    description:
-      "Winner of Shivaji University Lead College Women's Basketball Tournament (2023). Runner-up in Lead College Women's Badminton Tournament (2023). Runner-up in Artsy Poster Presentation on Industry 4.0 at DKTE National Tech Symposium (2023). 4 gold medals in skating up to district level. Best Dancer recognition across 12 years. Bharatanatyam examinations completed with distinction.",
+    title: "You're Not Prompting AI. You're Controlling a Probabilistic System.",
+    description: "A simple mental model for working with LLMs.",
+    link: "https://medium.com/@kaashishlalwani/youre-not-prompting-ai-you-re-controlling-a-probabilistic-system-f53d06989fd3",
   },
 ];
 
-const leadership = [
-  {
-    title: "Student Secretary — 3 Consecutive Years",
-    org: "Student Council, D. Y. Patil College of Engineering and Technology",
-    description:
-      "Youngest student leader to serve 3 consecutive terms managing 4,000+ active students. Held roles including Cultural Secretary, Corporate Relations Head (Entrepreneurship Cell), Research and Development Head (ASPIRE AIML Association), Public Relations Lead (Google Developers Student Club), Ladies Representative, and Deputy Chief of Training and Placement Cell.",
-  },
-  {
-    title: "Secretary, Rotaract Club",
-    org: "Rotaract / Rotary District 3170",
-    description:
-      "Led planning and coordination across nearly 75 clubs in Rotary International District 3170, strengthening communication, community impact, and club-level execution.",
-  },
-  {
-    title: "Anchor for 100+ Major Events",
-    org: "D. Y. Patil College and Community",
-    description:
-      "Hosted and anchored over 100 major institutional and community events across 4 years, demonstrating communication, presence, and leadership under pressure.",
-  },
+const recognition = [
+  { title: "Best Outgoing Student", detail: "Sole recipient", year: "2024" },
+  { title: "Harvard HackRare Finalist", detail: "Clinical notes pipeline", year: "2026" },
+  { title: "Smart India Hackathon Finalist", detail: "National, Ministry of Power", year: "2023" },
+  { title: "Student Council Secretary", detail: "Three terms, about 4,000 students", year: "" },
+  { title: "Best Emerging Rotaractor", detail: "Across 75+ clubs · District 3170 Secretary of the Year", year: "2024" },
+  { title: "District Chess Champion", detail: "Two years running", year: "2023, 2024" },
 ];
 
-const interests = [
-  "Finance and Markets",
-  "Chess",
-  "Music",
-  "Indian Classical Dance",
-  "Travel",
-  "Coffee",
-];
+const interests = ["Finance and Markets", "Chess", "Music", "Indian Classical Dance", "Travel", "Coffee"];
 
-const navLinkClass = "transition-colors duration-300 hover:text-[#c6a972]";
+/* Shared styles */
+const serif = "font-[family-name:var(--font-display)]";
+const label = "mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-[#8a5232]";
+const h2 = `${serif} text-4xl font-semibold leading-tight text-[#2a1a12] md:text-5xl`;
+const navLinkClass = "transition-colors duration-300 hover:text-[#8a5232]";
 const primaryButtonClass =
-  "rounded-full bg-[#c6a972] px-6 py-3 font-medium text-black transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90";
+  "rounded-full bg-[#2a1a12] px-6 py-3 font-medium text-[#f8f3ea] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#5b3a29]";
 const secondaryButtonClass =
-  "rounded-full border border-white/20 px-6 py-3 font-medium text-[#f5efe6] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#c6a972] hover:text-[#c6a972]";
-const smallSecondaryButtonClass =
-  "rounded-full border border-white/20 px-5 py-2.5 font-medium text-[#f5efe6] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#c6a972] hover:text-[#c6a972]";
-const smallPrimaryButtonClass =
-  "rounded-full bg-[#c6a972] px-5 py-2.5 font-medium text-black transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90";
-const interactiveCardClass =
-  "rounded-3xl border border-white/10 bg-white/5 p-8 transition-all duration-300 hover:-translate-y-1 hover:border-[#c6a972]/35 hover:bg-white/[0.07] hover:shadow-2xl";
-const statCardClass =
-  "rounded-2xl border border-white/10 bg-white/5 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-[#c6a972]/30 hover:bg-white/[0.07]";
-const chipClass =
-  "rounded-full border border-[#c6a972]/30 bg-[#c6a972]/10 px-4 py-2 text-sm text-[#eadfcd] transition-colors duration-300 hover:border-[#c6a972]/50 hover:bg-[#c6a972]/15";
-const darkChipClass =
-  "rounded-full border border-white/10 bg-[#111111] px-4 py-2 text-sm text-[#d8d0c4] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#c6a972]/30 hover:text-[#f5efe6]";
+  "rounded-full border border-[#2a1a12]/30 px-6 py-3 font-medium text-[#2a1a12] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#8a5232] hover:text-[#8a5232]";
+const smallLinkClass =
+  "rounded-full border border-[#2a1a12]/25 px-4 py-2 text-sm font-medium text-[#2a1a12] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#8a5232] hover:text-[#8a5232]";
+const cardClass =
+  "rounded-3xl border border-[#2a1a12]/10 bg-white/60 p-8 transition-all duration-300 hover:-translate-y-1 hover:border-[#8a5232]/40 hover:shadow-[0_20px_40px_-20px_rgba(42,26,18,0.35)]";
+const chipClass = "rounded-full border border-[#8a5232]/25 bg-[#efe6d6] px-4 py-2 text-sm text-[#2a1a12]";
+const dots =
+  "bg-[radial-gradient(circle,rgba(42,26,18,0.13)_1.6px,transparent_1.8px)] [background-size:26px_26px]";
 
 export default function Home() {
-  return (
-    <main className="min-h-screen bg-[#0a0a0a] text-[#f5efe6]">
+  const [filter, setFilter] = useState("All");
+  const [open, setOpen] = useState<string | null>(projects[0].title);
 
+  const visible = projects.filter((p) => filter === "All" || p.tags.includes(filter));
+
+  return (
+    <main
+      className={`${display.variable} ${body.variable} min-h-screen bg-[#f8f3ea] font-[family-name:var(--font-body)] text-[#2a1a12]`}
+    >
       {/* Nav */}
-      <nav className="sticky top-0 z-50 border-b border-white/10 bg-[#0a0a0a]/85 backdrop-blur">
+      <nav className="sticky top-0 z-50 border-b border-[#2a1a12]/10 bg-[#f8f3ea]/90 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <a href="#top" className="text-lg font-semibold tracking-wide text-[#c6a972] transition-opacity duration-300 hover:opacity-90">
-            Kashish Lalwani
+          <a href="#top" className={`${serif} text-2xl font-semibold text-[#2a1a12] transition-opacity hover:opacity-80`}>
+            Kashish <span className="italic text-[#8a5232]">Lalwani</span>
           </a>
-          <div className="hidden items-center gap-6 text-sm text-[#d8d0c4] lg:flex">
+          <div className="hidden items-center gap-6 text-sm text-[#5b3a29] lg:flex">
             <a href="#about" className={navLinkClass}>About</a>
             <a href="#experience" className={navLinkClass}>Experience</a>
             <a href="#projects" className={navLinkClass}>Projects</a>
+            <a href="#how" className={navLinkClass}>How I Work</a>
             <a href="#toolkit" className={navLinkClass}>Toolkit</a>
             <a href="#writing" className={navLinkClass}>Writing</a>
-            <a href="#awards" className={navLinkClass}>Awards</a>
             <a href="#contact" className={navLinkClass}>Contact</a>
           </div>
           <div className="flex items-center gap-3">
             <a href="/Kashish_Resume.pdf" target="_blank" rel="noreferrer"
-              className="hidden rounded-full border border-white/20 px-4 py-2 text-sm text-[#f5efe6] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#c6a972] hover:text-[#c6a972] sm:inline-flex">
+              className="hidden rounded-full border border-[#2a1a12]/25 px-4 py-2 text-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-[#8a5232] hover:text-[#8a5232] sm:inline-flex">
               Resume
             </a>
             <a href="mailto:work.kashishlalwani@gmail.com"
-              className="rounded-full border border-[#c6a972] px-4 py-2 text-sm text-[#c6a972] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c6a972] hover:text-black">
+              className="rounded-full bg-[#2a1a12] px-4 py-2 text-sm text-[#f8f3ea] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#5b3a29]">
               Email Me
             </a>
           </div>
@@ -474,182 +371,216 @@ export default function Home() {
       </nav>
 
       {/* Hero */}
-      <section id="top" className="relative mx-auto grid min-h-[calc(100vh-80px)] max-w-7xl items-center gap-12 overflow-hidden px-6 py-16 md:grid-cols-2">
-        <div className="absolute inset-0 -z-30 bg-[#07111a]" />
-        <div className="absolute left-[-8%] top-[2%] -z-20 h-72 w-72 rounded-full bg-[#72d2dd]/10 blur-3xl" />
-        <div className="absolute bottom-[8%] right-[-8%] -z-20 h-[26rem] w-[26rem] rounded-full bg-[#0f3a5c]/30 blur-3xl" />
-        <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_top,_rgba(198,169,114,0.10),_transparent_42%)]" />
+      <section id="top" className="relative overflow-hidden">
+        <div className={`absolute inset-0 -z-10 ${dots}`} />
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_70%_40%,rgba(248,243,234,0)_0%,#f8f3ea_70%)]" />
+        <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 py-16 md:grid-cols-[1.2fr_1fr] md:py-24">
+          <div>
+            <p className={label}>Data · Analytics · Finance · Healthcare · Applied AI</p>
+            <h1 className={`${serif} mb-6 text-6xl font-semibold leading-[0.95] md:text-8xl`}>
+              Kashish
+              <span className="block italic text-[#8a5232]">Lalwani</span>
+            </h1>
+            <p className={`${serif} mb-5 max-w-2xl text-2xl leading-snug text-[#2a1a12] md:text-3xl`}>
+              Data analyst turning messy data into clear decisions. Finance, healthcare and applied AI.
+            </p>
+            <p className="mb-6 max-w-2xl text-lg leading-8 text-[#5b3a29]">
+              {"MS in Data Science from Stony Brook. I've done hands-on work in finance reporting, manufacturing analytics, research data and an AI startup. I'm most interested in finance and healthcare, where good data leads to better decisions."}
+            </p>
+            <p className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-[#5b3a29]">
+              <span className="h-2 w-2 rounded-full bg-[#8a5232]" /> Texas, USA
+            </p>
+            <div className="mb-8 flex flex-wrap gap-2">
+              {focusAreas.map((item) => (
+                <span key={item} className={chipClass}>{item}</span>
+              ))}
+            </div>
+            <div className="flex flex-wrap gap-4">
+              <a href="/Kashish_Resume.pdf" target="_blank" rel="noreferrer" className={primaryButtonClass}>Resume</a>
+              <a href="https://linkedin.com/in/kashishlalwani13" target="_blank" rel="noreferrer" className={secondaryButtonClass}>LinkedIn</a>
+              <a href="https://github.com/kashishlalwani13" target="_blank" rel="noreferrer" className={secondaryButtonClass}>GitHub</a>
+            </div>
+          </div>
 
-        <div>
-          <p className="mb-4 text-sm uppercase tracking-[0.3em] text-[#c6a972]">
-            Systems AI Engineer · Applied Data Scientist · Analytics · ML Systems
-          </p>
-          <h1 className="mb-6 text-5xl font-bold leading-tight md:text-7xl">
-            Kashish
-            <span className="block text-[#c6a972]">Lalwani</span>
-          </h1>
-          <p className="mb-5 max-w-2xl text-lg leading-8 text-[#d8d0c4] md:text-xl">
-            I build production-grade AI and data systems that turn complex data into measurable business outcomes.
-          </p>
-          <p className="mb-5 max-w-2xl text-lg leading-8 text-neutral-400">
-            My work sits at the intersection of machine learning, product analytics, experimentation, retrieval systems, and backend execution.
-          </p>
-          <p className="mb-6 max-w-2xl text-base italic leading-7 text-[#cdb792] md:text-lg">
-            Focused on high-impact problems in fintech, payments, and real-time decision systems.
-          </p>
-          <div className="mb-8 flex flex-wrap gap-3">
-            {focusAreas.map((item) => (
-              <span key={item} className={chipClass}>{item}</span>
-            ))}
-          </div>
-          <div className="flex flex-wrap gap-4">
-            <a href="https://github.com/kashishlalwani13" target="_blank" rel="noreferrer" className={primaryButtonClass}>GitHub</a>
-            <a href="https://linkedin.com/in/kashishlalwani13" target="_blank" rel="noreferrer" className={secondaryButtonClass}>LinkedIn</a>
-            <a href="/Kashish_Resume.pdf" target="_blank" rel="noreferrer" className={secondaryButtonClass}>Resume</a>
-          </div>
-          <div className="mt-10 grid max-w-2xl grid-cols-1 gap-4 text-sm text-[#b8afa1] md:grid-cols-3">
-            <div className={statCardClass}>
-              <p className="text-2xl font-semibold text-[#f5efe6]">1M+</p>
-              <p>records processed in analytics and evaluation workflows</p>
-            </div>
-            <div className={statCardClass}>
-              <p className="text-2xl font-semibold text-[#f5efe6]">100K+</p>
-              <p>queries benchmarked across retrieval systems</p>
-            </div>
-            <div className={statCardClass}>
-              <p className="text-2xl font-semibold text-[#f5efe6]">50K+</p>
-              <p>daily events processed in experimentation infrastructure</p>
+          <div className="relative mx-auto w-full max-w-sm md:max-w-md">
+            <div className="absolute -right-4 -top-4 h-full w-full rounded-[2rem] border border-[#8a5232]/40" />
+            <div className="relative overflow-hidden rounded-[2rem] border-4 border-[#efe6d6] shadow-[0_30px_60px_-25px_rgba(42,26,18,0.45)]">
+              <Image src="/images/profile.jpg" alt="Kashish Lalwani" width={900} height={1200}
+                className="h-auto w-full object-cover transition-transform duration-700 hover:scale-[1.02]" priority />
             </div>
           </div>
         </div>
 
-        <div className="relative flex justify-center md:justify-end">
-          <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,_rgba(198,169,114,0.18),_transparent_55%)]" />
-          <div className="relative w-full max-w-md overflow-hidden rounded-[2rem] border border-[#c6a972]/30 bg-[#151515]/90 p-3 shadow-2xl backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 hover:border-[#c6a972]/45">
-            <div className="absolute left-4 top-4 h-24 w-24 rounded-full bg-[#c6a972]/10 blur-2xl" />
-            <Image src="/images/profile.jpg" alt="Kashish Lalwani" width={900} height={1200}
-              className="h-auto w-full rounded-[1.5rem] object-cover transition-transform duration-500 hover:scale-[1.01]" priority />
+        {/* Stats strip */}
+        <div className="border-y border-[#2a1a12]/10 bg-[#efe6d6]/80">
+          <div className="mx-auto grid max-w-7xl gap-6 px-6 py-8 sm:grid-cols-3">
+            {[
+              ["200K+", "records reconciled across systems"],
+              ["25+ hrs", "of manual reporting automated each month"],
+              ["1M+", "records analyzed in evaluation pipelines"],
+            ].map(([n, l]) => (
+              <div key={n}>
+                <p className={`${serif} text-4xl font-semibold tabular-nums text-[#2a1a12]`}>{n}</p>
+                <p className="text-sm text-[#5b3a29]">{l}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* About */}
       <section id="about" className="mx-auto max-w-7xl px-6 py-20">
-        <div className="mb-8">
-          <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[#c6a972]">About</p>
-          <h2 className="text-3xl font-semibold md:text-4xl">One profile. Three strengths. One clear story.</h2>
-        </div>
+        <p className={label}>About</p>
+        <h2 className={`${h2} mb-10`}>{"Hi, I'm Kashish. "}<span className="italic text-[#8a5232]">Nice to meet you.</span></h2>
         <div className="grid gap-8 md:grid-cols-2">
-          <div className={interactiveCardClass}>
-            <p className="text-lg leading-8 text-[#d8d0c4]">
-              I'm MS DS Grad (Stony Brook'26) . I build systems that connect business questions to data pipelines, analytics, machine learning, and production execution. My strongest work happens where technical depth must translate into measurable product or operational impact.
+          <div className={cardClass}>
+            <p className="mb-4 text-lg leading-8 text-[#2a1a12]">
+              {"I like the part of data work most people skip: checking that the numbers are right before anyone makes a decision with them."}
+            </p>
+            <p className="text-lg leading-8 text-[#5b3a29]">
+              {"I've reconciled factory data from systems that didn't agree, automated reports a finance team relied on, run A/B tests at a startup and measured how stable search results are. AI is part of my toolkit too. I use it where it actually helps."}
             </p>
           </div>
-          <div className={interactiveCardClass}>
-            <p className="mb-4 text-sm uppercase tracking-[0.2em] text-[#c6a972]">What I optimize for</p>
-            <ul className="space-y-4 text-[#d8d0c4]">
-              <li>• AI and ML systems that are measurable, reliable, and decision-useful</li>
-              <li>• Product analytics and experimentation tied to real business outcomes</li>
-              <li>• Retrieval, RAG, and evaluation workflows that hold up under scale</li>
-              <li>• Fintech and real-time decision systems where performance directly matters</li>
+          <div className={cardClass}>
+            <p className={label}>What I bring</p>
+            <ul className="space-y-4 text-[#2a1a12]">
+              {[
+                "Analytics and reporting that people trust",
+                "Clean, reconciled data before the dashboard",
+                "Clear explanations of what the numbers mean",
+                "Applied AI where it adds real value",
+              ].map((t) => (
+                <li key={t} className="flex gap-3"><span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#8a5232]" />{t}</li>
+              ))}
             </ul>
+            <p className="mt-6 text-sm text-[#5b3a29]">Interested in finance and healthcare.</p>
           </div>
         </div>
       </section>
 
       {/* Experience */}
-      <section id="experience" className="mx-auto max-w-7xl px-6 py-20">
-        <div className="mb-10">
-          <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[#c6a972]">Experience</p>
-          <h2 className="text-3xl font-semibold md:text-4xl">Building decision-ready systems across analytics, ML, and execution</h2>
-        </div>
-        <div className="space-y-6">
-          {experiences.map((item) => (
-            <div key={`${item.role}-${item.company}`} className={interactiveCardClass}>
-              <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-                <div>
-                  <h3 className="text-2xl font-semibold text-[#f5efe6]">{item.role}</h3>
-                  <p className="mt-1 text-lg text-[#d8d0c4]">{item.company}, {item.location}</p>
-                  <p className="mt-2 text-sm uppercase tracking-[0.14em] text-[#c6a972]">{item.type}</p>
+      <section id="experience" className="border-t border-[#2a1a12]/10 bg-[#efe6d6]/50">
+        <div className="mx-auto max-w-7xl px-6 py-20">
+          <p className={label}>Experience</p>
+          <h2 className={`${h2} mb-12`}>Where I have <span className="italic text-[#8a5232]">done the work</span></h2>
+          <div className="relative space-y-6 border-l border-[#8a5232]/30 pl-6 md:pl-10">
+            {experiences.map((item) => (
+              <div key={`${item.role}-${item.company}`} className={`relative ${cardClass}`}>
+                <span className="absolute -left-[31px] top-10 h-3 w-3 rounded-full border-2 border-[#f8f3ea] bg-[#8a5232] md:-left-[47px]" />
+                <div className="mb-5 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+                  <div>
+                    <h3 className={`${serif} text-3xl font-semibold`}>{item.role}</h3>
+                    <p className="mt-1 text-[#5b3a29]">{item.company}, {item.location}</p>
+                    <p className="mt-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#8a5232]">{item.type}</p>
+                  </div>
+                  <p className="text-sm text-[#5b3a29]">{item.period}</p>
                 </div>
-                <p className="text-sm text-[#b8afa1]">{item.period}</p>
+                <ul className="space-y-2 text-[#2a1a12]">
+                  {item.bullets.map((bullet) => (
+                    <li key={bullet} className="flex gap-3 leading-7">
+                      <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#8a5232]" />{bullet}
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <ul className="space-y-3 text-[#d8d0c4]">
-                {item.bullets.map((bullet) => (
-                  <li key={bullet} className="leading-8">• {bullet}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Projects */}
       <section id="projects" className="mx-auto max-w-7xl px-6 py-20">
-        <div className="mb-10">
-          <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[#c6a972]">Selected Work</p>
-          <h2 className="text-3xl font-semibold md:text-4xl">Projects that connect data, systems, and business value</h2>
+        <div className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className={label}>Selected Work</p>
+            <h2 className={h2}>Projects, <span className="italic text-[#8a5232]">problem first</span></h2>
+          </div>
+          <div className="flex flex-wrap gap-2" role="group" aria-label="Filter projects">
+            {filters.map((f) => (
+              <button key={f} type="button" onClick={() => setFilter(f)} aria-pressed={filter === f}
+                className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 ${
+                  filter === f ? "bg-[#2a1a12] text-[#f8f3ea]" : "border border-[#2a1a12]/20 text-[#2a1a12] hover:border-[#8a5232] hover:text-[#8a5232]"
+                }`}>
+                {f}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="space-y-6">
-          {featuredProjects.map((project) => (
-            <div key={project.title} className={interactiveCardClass}>
-              <div className="mb-3 flex flex-wrap items-center gap-3">
-                <p className="text-sm uppercase tracking-[0.18em] text-[#c6a972]">{project.tag}</p>
-                <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs uppercase tracking-[0.16em] text-emerald-200">
-                  {project.status}
-                </span>
-                <span className="rounded-full border border-[#c6a972]/20 bg-[#c6a972]/10 px-3 py-1 text-xs uppercase tracking-[0.16em] text-[#eadfcd]">
-                  Scalable · Measurable · Outcome-Driven
-                </span>
-              </div>
-              <h3 className="mb-4 text-2xl font-semibold text-[#f5efe6]">{project.title}</h3>
-              <p className="mb-4 text-sm uppercase tracking-[0.12em] text-[#b8afa1]">{project.tech}</p>
-              <p className="mb-4 leading-8 text-[#d8d0c4]">{project.description}</p>
-              <p className="mb-6 leading-8 text-[#f1e7d8]">
-                <span className="font-semibold text-[#c6a972]">Impact:</span> {project.impact}
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <a href={project.github} target="_blank" rel="noreferrer" className={smallPrimaryButtonClass}>GitHub</a>
-                {project.hosted && (
-                  <a href={project.hosted} target="_blank" rel="noreferrer" className={smallSecondaryButtonClass}>Live Demo</a>
-                )}
-                {project.articleComingSoon ? (
-                  <span className="inline-flex cursor-not-allowed items-center rounded-full border border-white/10 bg-white/5 px-5 py-2.5 text-sm text-[#a89d8c]">
-                    Article Coming Soon
-                  </span>
-                ) : project.article ? (
-                  <a href={project.article} target="_blank" rel="noreferrer" className={smallSecondaryButtonClass}>Article</a>
-                ) : null}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-14">
-          <p className="mb-6 text-sm uppercase tracking-[0.25em] text-[#c6a972]">Additional Work</p>
-          <div className="grid gap-6 md:grid-cols-2">
-            {selectedProjects.map((project) => (
-              <div key={project.title} className={interactiveCardClass}>
-                <h3 className="mb-3 text-2xl font-semibold text-[#f5efe6]">{project.title}</h3>
-                <p className="mb-4 text-sm uppercase tracking-[0.12em] text-[#b8afa1]">{project.tech}</p>
-                <p className="mb-4 leading-8 text-[#d8d0c4]">{project.description}</p>
-                <p className="mb-4 leading-8 text-[#f1e7d8]">
-                  <span className="font-semibold text-[#c6a972]">Impact:</span> {project.impact}
+        <div className="space-y-12">
+          {groups.map((g) => {
+            const list = visible.filter((p) => p.group === g);
+            if (!list.length) return null;
+            return (
+              <div key={g}>
+                <p className="mb-4 flex items-center gap-4 text-xs font-semibold uppercase tracking-[0.25em] text-[#5b3a29]">
+                  {g}<span className="h-px flex-1 bg-[#2a1a12]/15" />
                 </p>
-                {project.note ? <p className="mb-5 text-sm text-[#a89d8c]">{project.note}</p> : null}
-                <div className="flex flex-wrap gap-3">
-                  {project.github ? (
-                    <a href={project.github} target="_blank" rel="noreferrer" className={smallSecondaryButtonClass}>GitHub</a>
-                  ) : (
-                    <span className="inline-flex rounded-full border border-white/10 bg-white/5 px-5 py-2.5 text-sm text-[#a89d8c]">
-                      Repository not public
-                    </span>
-                  )}
-                  {project.articles && project.articles.map((a) => (
-                    <a key={a.url} href={a.url} target="_blank" rel="noreferrer" className={smallSecondaryButtonClass}>{a.label}</a>
-                  ))}
+                <div className="space-y-4">
+                  {list.map((p) => {
+                    const isOpen = open === p.title;
+                    return (
+                      <div key={p.title}
+                        className={`rounded-3xl border bg-white/60 transition-all duration-300 ${isOpen ? "border-[#8a5232]/50 shadow-[0_20px_40px_-25px_rgba(42,26,18,0.4)]" : "border-[#2a1a12]/10 hover:border-[#8a5232]/40"}`}>
+                        <button type="button" onClick={() => setOpen(isOpen ? null : p.title)} aria-expanded={isOpen}
+                          className="flex w-full items-center gap-4 p-6 text-left md:p-8">
+                          <div className="min-w-0 flex-1">
+                            <div className="mb-2 flex flex-wrap gap-2">
+                              {p.tags.map((t) => (
+                                <span key={t} className="rounded-full bg-[#efe6d6] px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-[#8a5232]">{t}</span>
+                              ))}
+                            </div>
+                            <h3 className={`${serif} text-2xl font-semibold md:text-3xl`}>{p.title}</h3>
+                            <p className="mt-1 text-sm font-medium text-[#5b3a29]">{p.headline}</p>
+                          </div>
+                          <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-full border border-[#2a1a12]/20 text-xl transition-transform duration-300 ${isOpen ? "rotate-45 bg-[#2a1a12] text-[#f8f3ea]" : ""}`} aria-hidden="true">+</span>
+                        </button>
+                        {isOpen && (
+                          <div className="border-t border-[#2a1a12]/10 px-6 pb-8 pt-6 md:px-8">
+                            <dl className="grid gap-6 md:grid-cols-2">
+                              {[
+                                ["Problem", p.problem],
+                                ["What I did", p.did],
+                                ["Result", p.result],
+                                ["Tools", p.tools],
+                                ["What I learned", p.learned],
+                              ].map(([k, v]) => (
+                                <div key={k}>
+                                  <dt className="mb-1 text-xs font-semibold uppercase tracking-[0.2em] text-[#8a5232]">{k}</dt>
+                                  <dd className="leading-7 text-[#2a1a12]">{v}</dd>
+                                </div>
+                              ))}
+                            </dl>
+                            {p.note && <p className="mt-6 text-sm italic text-[#5b3a29]">{p.note}</p>}
+                            <div className="mt-6 flex flex-wrap gap-3">
+                              {p.github && <a href={p.github} target="_blank" rel="noreferrer" className={smallLinkClass}>GitHub</a>}
+                              {p.hosted && <a href={p.hosted} target="_blank" rel="noreferrer" className={smallLinkClass}>Live Demo</a>}
+                              {p.article && <a href={p.article} target="_blank" rel="noreferrer" className={smallLinkClass}>Article</a>}
+                              {!p.github && <span className="rounded-full border border-[#2a1a12]/10 px-4 py-2 text-sm text-[#5b3a29]">Repository not public</span>}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* How I work */}
+      <section id="how" className="relative overflow-hidden bg-[#2a1a12] text-[#f8f3ea]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(248,243,234,0.07)_1.6px,transparent_1.8px)] [background-size:26px_26px]" />
+        <div className="relative mx-auto max-w-7xl px-6 py-20">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-[#d4ab72]">How I Work</p>
+          <h2 className={`${serif} mb-12 text-4xl font-semibold md:text-5xl`}>Five habits <span className="italic text-[#d4ab72]">I keep</span></h2>
+          <div className="grid gap-px overflow-hidden rounded-3xl border border-[#f8f3ea]/10 bg-[#f8f3ea]/10 sm:grid-cols-2 lg:grid-cols-5">
+            {habits.map((h) => (
+              <div key={h.title} className="bg-[#2a1a12] p-6 transition-colors duration-300 hover:bg-[#3a2418]">
+                <h3 className={`${serif} mb-2 text-2xl font-semibold text-[#d4ab72]`}>{h.title}</h3>
+                <p className="text-sm leading-6 text-[#e9dcc8]">{h.text}</p>
               </div>
             ))}
           </div>
@@ -658,15 +589,13 @@ export default function Home() {
 
       {/* Toolkit */}
       <section id="toolkit" className="mx-auto max-w-7xl px-6 py-20">
-        <div className="mb-10">
-          <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[#c6a972]">Technical Toolkit</p>
-          <h2 className="text-3xl font-semibold md:text-4xl">Analytics, ML, systems, and decision infrastructure</h2>
-        </div>
+        <p className={label}>Toolkit</p>
+        <h2 className={`${h2} mb-10`}>What I <span className="italic text-[#8a5232]">work with</span></h2>
         <div className="grid gap-6 md:grid-cols-2">
           {toolkit.map((category) => (
-            <div key={category.title} className={interactiveCardClass}>
-              <h3 className="mb-5 text-xl font-semibold text-[#f5efe6]">{category.icon} {category.title}</h3>
-              <div className="flex flex-wrap gap-3">
+            <div key={category.title} className={cardClass}>
+              <h3 className={`${serif} mb-5 text-2xl font-semibold`}>{category.title}</h3>
+              <div className="flex flex-wrap gap-2">
                 {category.items.map((item) => (
                   <span key={item} className={chipClass}>{item}</span>
                 ))}
@@ -677,157 +606,98 @@ export default function Home() {
       </section>
 
       {/* Education */}
-      <section id="education" className="mx-auto max-w-7xl px-6 py-20">
-        <div className="mb-10">
-          <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[#c6a972]">Education</p>
-          <h2 className="text-3xl font-semibold md:text-4xl">Academic foundation</h2>
-        </div>
+      <section id="education" className="mx-auto max-w-7xl px-6 pb-20">
+        <p className={label}>Education</p>
         <div className="grid gap-6 md:grid-cols-2">
           {education.map((item) => (
-            <div key={item.school} className={interactiveCardClass}>
-              <h3 className="text-2xl font-semibold text-[#f5efe6]">{item.school}</h3>
-              <p className="mt-2 text-lg text-[#d8d0c4]">{item.degree}</p>
-              <p className="mt-3 text-sm uppercase tracking-[0.14em] text-[#c6a972]">{item.location}</p>
-              <p className="mt-2 text-sm text-[#b8afa1]">{item.period}</p>
-              {item.note ? <p className="mt-4 leading-7 text-[#d8d0c4]">{item.note}</p> : null}
+            <div key={item.school} className={cardClass}>
+              <h3 className={`${serif} text-3xl font-semibold`}>{item.school}</h3>
+              <p className="mt-2 text-lg text-[#2a1a12]">{item.degree}</p>
+              <p className="mt-2 text-sm text-[#5b3a29]">{item.period}</p>
+              {item.note ? <p className="mt-3 text-sm font-medium text-[#8a5232]">{item.note}</p> : null}
             </div>
           ))}
         </div>
       </section>
 
       {/* Writing */}
-      <section id="writing" className="mx-auto max-w-7xl px-6 py-20">
-        <div className="mb-10">
-          <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[#c6a972]">Writing</p>
-          <h2 className="text-3xl font-semibold md:text-4xl">Systems thinking, evaluation, and retrieval</h2>
-        </div>
-
-        <div className="mb-10">
-          <p className="mb-6 text-sm uppercase tracking-[0.22em] text-[#c6a972]">Project Writeups</p>
+      <section id="writing" className="border-t border-[#2a1a12]/10 bg-[#efe6d6]/50">
+        <div className="mx-auto max-w-7xl px-6 py-20">
+          <p className={label}>Writing</p>
+          <h2 className={`${h2} mb-10`}>On data, decisions <span className="italic text-[#8a5232]">and AI</span></h2>
           <div className="grid gap-6 md:grid-cols-2">
-            {projectWriting.map((item) => (
-              <div key={item.title} className={interactiveCardClass}>
-                <p className="mb-3 text-sm uppercase tracking-[0.14em] text-[#c6a972]">{item.type}</p>
-                <h3 className="mb-4 text-xl font-semibold text-[#f5efe6]">{item.title}</h3>
-                <p className="mb-6 leading-8 text-[#d8d0c4]">{item.description}</p>
-                <a href={item.link} target="_blank" rel="noreferrer" className={smallSecondaryButtonClass}>Read Article</a>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <p className="mb-6 text-sm uppercase tracking-[0.22em] text-[#c6a972]">Ideas and Concepts</p>
-          <div className="grid gap-6 md:grid-cols-2">
-            {conceptWriting.map((item) => (
-              <div key={item.title} className={interactiveCardClass}>
-                <p className="mb-3 text-sm uppercase tracking-[0.14em] text-[#c6a972]">{item.type}</p>
-                <h3 className="mb-4 text-xl font-semibold text-[#f5efe6]">{item.title}</h3>
-                <p className="mb-6 leading-8 text-[#d8d0c4]">{item.description}</p>
-                <a href={item.link} target="_blank" rel="noreferrer" className={smallSecondaryButtonClass}>Read Article</a>
-              </div>
+            {[...projectWriting.map((w) => ({ ...w, type: "Project write-up" })), ...conceptWriting.map((w) => ({ ...w, type: "Ideas" }))].map((item) => (
+              <a key={item.title} href={item.link} target="_blank" rel="noreferrer" className={`${cardClass} group block`}>
+                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#8a5232]">{item.type}</p>
+                <h3 className={`${serif} mb-3 text-2xl font-semibold leading-snug`}>{item.title}</h3>
+                <p className="mb-5 leading-7 text-[#5b3a29]">{item.description}</p>
+                <span className="text-sm font-medium text-[#2a1a12] transition-colors group-hover:text-[#8a5232]">Read on Medium →</span>
+              </a>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Awards and Leadership */}
+      {/* Recognition + interests */}
       <section id="awards" className="mx-auto max-w-7xl px-6 py-20">
-        <div className="mb-10">
-          <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[#c6a972]">Awards and Leadership</p>
-          <h2 className="text-3xl font-semibold md:text-4xl">Recognition beyond technical execution</h2>
-        </div>
-        <div className="grid gap-6 md:grid-cols-2">
-          {awards.map((award) => (
-            <div key={award.title} className={interactiveCardClass}>
-              <div className="mb-3 flex items-center justify-between gap-3">
-                <h3 className="text-2xl font-semibold text-[#f5efe6]">{award.title}</h3>
-                <span className="text-sm text-[#b8afa1]">{award.year}</span>
-              </div>
-              <p className="mb-4 text-sm uppercase tracking-[0.14em] text-[#c6a972]">{award.org}</p>
-              <p className="leading-8 text-[#d8d0c4]">{award.description}</p>
+        <div className="grid gap-12 lg:grid-cols-[2fr_1fr]">
+          <div>
+            <p className={label}>Leadership and Recognition</p>
+            <ul className="divide-y divide-[#2a1a12]/10 border-y border-[#2a1a12]/10">
+              {recognition.map((r) => (
+                <li key={r.title} className="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between">
+                  <span className={`${serif} text-xl font-semibold`}>{r.title}</span>
+                  <span className="text-sm text-[#5b3a29]">{r.detail}{r.year ? ` · ${r.year}` : ""}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p className={label}>Beyond Work</p>
+            <div className="flex flex-wrap gap-2">
+              {interests.map((item) => (
+                <span key={item} className={chipClass}>{item}</span>
+              ))}
             </div>
-          ))}
-        </div>
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
-          {leadership.map((item) => (
-            <div key={item.title} className={interactiveCardClass}>
-              <h3 className="mb-2 text-2xl font-semibold text-[#f5efe6]">{item.title}</h3>
-              <p className="mb-4 text-sm uppercase tracking-[0.14em] text-[#c6a972]">{item.org}</p>
-              <p className="leading-8 text-[#d8d0c4]">{item.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Interests */}
-      <section className="mx-auto max-w-7xl px-6 py-20">
-        <div className="rounded-3xl border border-white/10 bg-white/5 p-8 transition-all duration-300 hover:border-[#c6a972]/30 hover:bg-white/[0.07]">
-          <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[#c6a972]">Beyond Work</p>
-          <h2 className="mb-6 text-3xl font-semibold md:text-4xl">What keeps me sharp</h2>
-          <div className="flex flex-wrap gap-3">
-            {interests.map((item) => (
-              <span key={item} className={darkChipClass}>{item}</span>
-            ))}
           </div>
         </div>
       </section>
 
       {/* Contact */}
-      <section id="contact" className="mx-auto max-w-7xl px-6 py-20">
-        <div className="rounded-[2rem] border border-[#c6a972]/20 bg-[#121212] p-10 transition-all duration-300 hover:-translate-y-1 hover:border-[#c6a972]/35 hover:shadow-2xl">
-          <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[#c6a972]">Contact</p>
-          <h2 className="mb-4 text-3xl font-semibold md:text-4xl">
-            Open to Data Scientist, ML Engineer, Applied AI, and Analytics roles.
+      <section id="contact" className="relative overflow-hidden bg-[#2a1a12] text-[#f8f3ea]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(248,243,234,0.07)_1.6px,transparent_1.8px)] [background-size:26px_26px]" />
+        <div className="relative mx-auto max-w-7xl px-6 py-20">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-[#d4ab72]">Contact</p>
+          <h2 className={`${serif} mb-4 max-w-4xl text-4xl font-semibold leading-tight md:text-5xl`}>
+            {"Let's talk about "}<span className="italic text-[#d4ab72]">your data.</span>
           </h2>
-          <p className="mb-8 max-w-3xl text-lg leading-8 text-[#d8d0c4]">
-            I am especially interested in roles where machine learning, analytics, experimentation, and systems execution come together to shape product performance and business decisions.
+          <p className="mb-10 max-w-3xl text-lg leading-8 text-[#e9dcc8]">
+            Open to data analyst, business analyst, finance and healthcare analytics, and applied AI roles.
           </p>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#c6a972]/30 hover:bg-white/[0.07]">
-              <p className="mb-2 text-sm uppercase tracking-[0.14em] text-[#c6a972]">Location</p>
-              <p className="text-[#f5efe6]">San Antonio, Texas, USA — Open to Relocation</p>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#c6a972]/30 hover:bg-white/[0.07]">
-              <p className="mb-2 text-sm uppercase tracking-[0.14em] text-[#c6a972]">Work Authorization</p>
-              <p className="text-[#f5efe6]">Authorized to work in the U.S. (EAD) — Available Immediately</p>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#c6a972]/30 hover:bg-white/[0.07]">
-              <p className="mb-2 text-sm uppercase tracking-[0.14em] text-[#c6a972]">Email</p>
-              <a href="mailto:work.kashishlalwani@gmail.com" className="text-[#f5efe6] transition-colors duration-300 hover:text-[#c6a972]">
-                work.kashishlalwani@gmail.com
-              </a>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#c6a972]/30 hover:bg-white/[0.07]">
-              <p className="mb-2 text-sm uppercase tracking-[0.14em] text-[#c6a972]">Phone (USA)</p>
-              <a href="tel:+19342463035" className="text-[#f5efe6] transition-colors duration-300 hover:text-[#c6a972]">
-                +1 (934) 246-3035
-              </a>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#c6a972]/30 hover:bg-white/[0.07]">
-              <p className="mb-2 text-sm uppercase tracking-[0.14em] text-[#c6a972]">Phone (India)</p>
-              <a href="tel:+919371444111" className="text-[#f5efe6] transition-colors duration-300 hover:text-[#c6a972]">
-                +91 93714 44111
-              </a>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#c6a972]/30 hover:bg-white/[0.07]">
-              <p className="mb-2 text-sm uppercase tracking-[0.14em] text-[#c6a972]">LinkedIn</p>
-              <a href="https://linkedin.com/in/kashishlalwani13" target="_blank" rel="noreferrer" className="text-[#f5efe6] transition-colors duration-300 hover:text-[#c6a972]">
-                linkedin.com/in/kashishlalwani13
-              </a>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#c6a972]/30 hover:bg-white/[0.07]">
-              <p className="mb-2 text-sm uppercase tracking-[0.14em] text-[#c6a972]">GitHub</p>
-              <a href="https://github.com/kashishlalwani13" target="_blank" rel="noreferrer" className="text-[#f5efe6] transition-colors duration-300 hover:text-[#c6a972]">
-                github.com/kashishlalwani13
-              </a>
-            </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { k: "Location", v: "Texas, USA", href: "" },
+              { k: "Email", v: "work.kashishlalwani@gmail.com", href: "mailto:work.kashishlalwani@gmail.com" },
+              { k: "Phone", v: "+1 (934) 246-3035", href: "tel:+19342463035" },
+              { k: "LinkedIn", v: "linkedin.com/in/kashishlalwani13", href: "https://linkedin.com/in/kashishlalwani13" },
+              { k: "GitHub", v: "github.com/kashishlalwani13", href: "https://github.com/kashishlalwani13" },
+            ].map((c) => (
+              <div key={c.k} className="rounded-2xl border border-[#f8f3ea]/15 bg-[#f8f3ea]/5 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#d4ab72]/50">
+                <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#d4ab72]">{c.k}</p>
+                {c.href ? (
+                  <a href={c.href} target={c.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer"
+                    className="break-words text-[#f8f3ea] transition-colors duration-300 hover:text-[#d4ab72]">{c.v}</a>
+                ) : (
+                  <p className="text-[#f8f3ea]">{c.v}</p>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <footer className="border-t border-white/10 px-6 py-8 text-center text-sm text-[#9e9486]">
-        Designed and built by Kashish Lalwani — where analytics, AI, and systems meet execution.
+      <footer className="bg-[#2a1a12] px-6 py-8 text-center text-sm text-[#c9b8a2]">
+        <div className="mx-auto max-w-7xl border-t border-[#f8f3ea]/10 pt-8">Designed and built by Kashish Lalwani.</div>
       </footer>
     </main>
   );
