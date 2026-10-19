@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import Image from "next/image";
 import { Cormorant_Garamond, Manrope, JetBrains_Mono } from "next/font/google";
 
@@ -164,6 +164,24 @@ const recognition = [
   { title: "District Chess Champion", detail: "2023 and 2024" },
 ];
 
+const petals = [
+  { left: "8%", size: 12, dur: "19s", delay: "0s" },
+  { left: "22%", size: 9, dur: "24s", delay: "-8s" },
+  { left: "41%", size: 14, dur: "21s", delay: "-3s" },
+  { left: "58%", size: 10, dur: "26s", delay: "-14s" },
+  { left: "74%", size: 13, dur: "20s", delay: "-6s" },
+  { left: "90%", size: 9, dur: "23s", delay: "-17s" },
+];
+
+const certifications = [
+  { title: "Claude 101", org: "Anthropic", year: "2026", link: "https://verify.skilljar.com/c/quupyvhd6au3" },
+  { title: "Essentials of Prompt Engineering", org: "Amazon Web Services", year: "2026", link: "" },
+  { title: "AWS Academy Data Analytics", org: "Amazon Web Services", year: "2023", link: "https://www.credly.com/badges/84190e18-bb3a-4439-871e-d0eeb65e4603" },
+  { title: "Supervised ML: Regression and Classification", org: "Stanford University · Coursera", year: "2023", link: "https://www.coursera.org/account/accomplishments/records/CVP65J5KNZ53" },
+  { title: "Quantitative Finance Workshop", org: "E-Cell, IIT Bombay", year: "2023", link: "" },
+  { title: "Python for Data Science, AI and Development", org: "IBM · Coursera", year: "2022", link: "https://www.coursera.org/verify/RBQNUMXKHY35" },
+];
+
 const interests = ["Finance and Markets", "Chess", "Music", "Indian Classical Dance", "Travel", "Coffee"];
 
 const socials = [
@@ -187,7 +205,22 @@ const lightCard = "rounded-3xl border border-[#1c110b]/10 bg-[#fbf6ec] p-7 trans
 const darkBtn = "rounded-full bg-[#1c110b] px-6 py-3 text-sm font-semibold text-[#f2e8d5] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#2a1810]";
 const smallLink = "rounded-full border border-[#1c110b]/25 px-4 py-2 text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1c110b] hover:text-[#f2e8d5]";
 
-function Icon({ children }: { children: React.ReactNode }) {
+/* Letters rise one by one, but words never break mid-word */
+function wordsOf(text: string) {
+  let n = 0;
+  const words = text.split(" ");
+  return words.map((word, wi) => (
+    <span key={wi} className="inline-block whitespace-nowrap">
+      {word.split("").map((ch) => {
+        const i = n++;
+        return <span key={i} className="rise-letter" style={{ animationDelay: `${i * 28}ms` }}>{ch}</span>;
+      })}
+      {wi < words.length - 1 ? " " : ""}
+    </span>
+  ));
+}
+
+function Icon({ children }: { children: ReactNode }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5" aria-hidden="true">
       {children}
@@ -220,8 +253,13 @@ export default function Home() {
         .ticker:hover .ticker-track { animation-play-state: paused; }
         .floaty { animation: floaty 5s ease-in-out infinite; }
         .caret { animation: blink 1s step-start infinite; }
+        @keyframes drift { 0% { transform: translateY(0) rotate(0deg); opacity: 0; } 10% { opacity: .55; } 90% { opacity: .45; } 100% { transform: translateY(-110vh) translateX(60px) rotate(320deg); opacity: 0; } }
+        @keyframes glow { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-40px,30px) scale(1.12); } }
+        .petal { position: absolute; bottom: -40px; border-radius: 80% 0 80% 0; background: linear-gradient(135deg,#fbf6ec,#e8cdbd); animation: drift linear infinite; }
+        .glow { animation: glow 14s ease-in-out infinite; }
         @media (prefers-reduced-motion: reduce) {
-          .rise-letter, .ticker-track, .floaty, .caret, .spin-ring { animation: none !important; }
+          .rise-letter, .ticker-track, .floaty, .caret, .spin-ring, .petal, .glow { animation: none !important; }
+          .petal { display: none; }
         }
       `}</style>
 
@@ -229,9 +267,9 @@ export default function Home() {
       <div className="fixed bottom-0 left-6 z-40 hidden flex-col items-center gap-3 md:flex">
         {socials.map((s) => (
           <a key={s.label} href={s.href} target={s.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer" aria-label={s.label}
-            className="group relative grid h-11 w-11 place-items-center rounded-full border border-[#f2e8d5]/40 bg-[#1c110b] text-[#f2e8d5] shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-[#d9b37c] hover:text-[#1c110b]">
+            title={s.label}
+            className="grid h-11 w-11 place-items-center rounded-full border border-[#f2e8d5]/40 bg-[#1c110b] text-[#f2e8d5] shadow-lg outline-none transition-all duration-300 hover:-translate-y-1 hover:bg-[#d9b37c] hover:text-[#1c110b] focus-visible:ring-2 focus-visible:ring-[#e8cdbd]">
             <Icon>{s.path}</Icon>
-            <span className={`${monoF} pointer-events-none absolute left-14 whitespace-nowrap rounded-md bg-[#1c110b] px-2 py-1 text-xs text-[#f2e8d5] opacity-0 transition-opacity group-hover:opacity-100`}>{s.label}</span>
           </a>
         ))}
         <span className="h-20 w-px bg-[#d9b37c]/60" />
@@ -260,19 +298,24 @@ export default function Home() {
 
       {/* Hero — espresso */}
       <section id="top" className="relative overflow-hidden bg-[#1c110b] text-[#f2e8d5]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(242,232,213,0.07)_1.7px,transparent_1.9px)] [background-size:28px_28px]" />
-        <div className="absolute -right-40 top-10 h-[34rem] w-[34rem] rounded-full bg-[#8a5232]/30 blur-3xl" />
-        <div className={`relative ${wrap} grid items-center gap-14 py-20 md:grid-cols-[1.25fr_1fr] md:py-28`}>
+        {/* soft glow + drifting petals */}
+        <div className="glow absolute -right-32 -top-20 h-[36rem] w-[36rem] rounded-full bg-[#e8cdbd]/20 blur-[110px]" />
+        <div className="glow absolute -bottom-40 left-[-10rem] h-[30rem] w-[30rem] rounded-full bg-[#d9b37c]/15 blur-[110px] [animation-delay:-6s]" />
+        <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+          {petals.map((p, i) => (
+            <span key={i} className="petal" style={{ left: p.left, width: p.size, height: p.size * 1.5, animationDuration: p.dur, animationDelay: p.delay }} />
+          ))}
+        </div>
+
+        <div className={`relative ${wrap} grid items-center gap-16 py-20 md:grid-cols-[1.3fr_1fr] md:py-28`}>
           <div>
-            <p className={`${eyebrow} text-[#aab68f]`}>{"> hello_world.py"}</p>
-            <p className={`${serif} text-3xl italic text-[#d9b37c] md:text-4xl`}>{"I'm Kashish, and I'm"}</p>
-            <h1 className={`${serif} mt-2 min-h-[2.2em] text-6xl font-semibold leading-[1] md:min-h-[1.1em] md:text-8xl`} aria-live="polite">
+            <p className={`${eyebrow} text-[#e8cdbd]/80`}>{"> hello_world.py"}</p>
+            <p className={`${serif} text-3xl italic text-[#e8cdbd] md:text-4xl`}>{"I'm Kashish, and I'm"}</p>
+            <h1 className={`${serif} mt-2 min-h-[2.1em] text-5xl font-semibold leading-[1.02] sm:text-6xl lg:text-7xl`} aria-live="polite">
               <span key={roleIndex}>
-                {roles[roleIndex].split("").map((ch, i) => (
-                  <span key={i} className="rise-letter" style={{ animationDelay: `${i * 28}ms` }}>{ch === " " ? " " : ch}</span>
-                ))}
+                {wordsOf(roles[roleIndex])}
               </span>
-              <span className="caret ml-1 inline-block h-[0.8em] w-[3px] translate-y-[0.08em] bg-[#d9b37c]" aria-hidden="true" />
+              <span className="caret ml-1 inline-block h-[0.8em] w-[3px] translate-y-[0.08em] bg-[#e8cdbd]" aria-hidden="true" />
             </h1>
             <p className="mt-8 max-w-xl text-lg leading-8 text-[#f2e8d5]/80">
               I turn messy data into clear decisions. Finance, healthcare and applied AI. MS Data Science, Stony Brook.
@@ -291,23 +334,21 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Photo with spinning ring */}
-          <div className="relative mx-auto aspect-square w-full max-w-[22rem]">
-            <svg viewBox="0 0 200 200" className="spin-ring absolute inset-0 h-full w-full animate-[spin_28s_linear_infinite]" aria-hidden="true">
-              <defs><path id="ring" d="M100,100 m-88,0 a88,88 0 1,1 176,0 a88,88 0 1,1 -176,0" /></defs>
-              <text className="fill-[#d9b37c]" style={{ fontSize: 9.5, letterSpacing: 3.2, fontFamily: "var(--font-mono)" }}>
-                <textPath href="#ring">DATA · ANALYTICS · FINANCE · HEALTHCARE · APPLIED AI · </textPath>
-              </text>
-            </svg>
-            <div className="absolute inset-[13%] overflow-hidden rounded-full border-4 border-[#f2e8d5] shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)]">
-              <Image src="/images/profile.jpg" alt="Kashish Lalwani" fill sizes="(max-width: 768px) 80vw, 360px" className="object-cover object-[60%_25%]" priority />
+          {/* Photo in an arch, with a rotating seal */}
+          <div className="relative mx-auto w-full max-w-[20rem]">
+            <div className="absolute -inset-3 translate-x-3 translate-y-3 rounded-t-full rounded-b-[2.5rem] border border-[#e8cdbd]/40" aria-hidden="true" />
+            <div className="relative aspect-[3/4] overflow-hidden rounded-t-full rounded-b-[2.5rem] border-[5px] border-[#f2e8d5] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.75)]">
+              <Image src="/images/profile.jpg" alt="Kashish Lalwani" fill sizes="(max-width: 768px) 80vw, 320px" className="object-cover object-[60%_30%] transition-transform duration-700 hover:scale-[1.03]" priority />
             </div>
-            <span className="floaty absolute -left-2 top-[18%] rounded-2xl bg-[#f2e8d5] px-4 py-2 text-sm font-semibold text-[#1c110b] shadow-xl [--r:-6deg]">
-              rows in = rows out <span className="text-[#4f5f3c]">✓</span>
-            </span>
-            <span className="floaty absolute -right-2 bottom-[14%] rounded-2xl bg-[#aab68f] px-4 py-2 text-sm font-semibold text-[#1c110b] shadow-xl [--r:5deg] [animation-delay:1.2s]">
-              ♟ 2× district chess champ
-            </span>
+            <div className="absolute -bottom-8 -left-10 h-32 w-32 rounded-full bg-[#e8cdbd] text-[#1c110b] shadow-xl">
+              <svg viewBox="0 0 120 120" className="spin-ring h-full w-full animate-[spin_22s_linear_infinite]" aria-hidden="true">
+                <defs><path id="seal" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0" /></defs>
+                <text className="fill-[#1c110b]" style={{ fontSize: 9.2, letterSpacing: 2.6, fontFamily: "var(--font-mono)" }}>
+                  <textPath href="#seal">DATA · FINANCE · HEALTHCARE · AI · </textPath>
+                </text>
+              </svg>
+              <span className={`${serif} absolute inset-0 grid place-items-center text-3xl italic`}>kl</span>
+            </div>
           </div>
         </div>
       </section>
@@ -539,32 +580,53 @@ export default function Home() {
 
       {/* Recognition — sage */}
       <section id="awards" className="bg-[#aab68f]">
-        <div className={`${wrap} grid gap-12 py-20 lg:grid-cols-[2fr_1fr]`}>
-          <div>
-            <p className={`${eyebrow} text-[#1c110b]/70`}>{"> achievements.unlocked"}</p>
-            <ul className="divide-y divide-[#1c110b]/15 border-y border-[#1c110b]/15">
-              {recognition.map((r) => (
-                <li key={r.title} className="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between">
-                  <span className={`${serif} text-2xl font-semibold`}>{r.title}</span>
-                  <span className="text-sm text-[#1c110b]/75">{r.detail}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <p className={`${eyebrow} text-[#1c110b]/70`}>{"> off_duty"}</p>
-            <div className="flex flex-wrap gap-2">
-              {interests.map((i) => (
-                <span key={i} className="rounded-full bg-[#f2e8d5] px-4 py-2 text-sm transition-transform duration-300 hover:-rotate-3">{i}</span>
-              ))}
+        <div className={`${wrap} py-24`}>
+          <p className={`${eyebrow} text-[#1c110b]/70`}>{"> achievements.unlocked"}</p>
+          <h2 className={`${h2} mb-12`}>Wins, <span className="italic">and the receipts.</span></h2>
+          <div className="grid gap-6 lg:grid-cols-2">
+            <div className="rounded-3xl bg-[#fbf6ec] p-7">
+              <p className={`${monoF} mb-4 text-xs text-[#8a5232]`}>{"// leadership_and_recognition"}</p>
+              <ul className="divide-y divide-[#1c110b]/10">
+                {recognition.map((r) => (
+                  <li key={r.title} className="flex flex-col gap-0.5 py-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                    <span className={`${serif} text-xl font-semibold`}>{r.title}</span>
+                    <span className="text-sm text-[#1c110b]/70 sm:text-right">{r.detail}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
+            <div className="rounded-3xl bg-[#1c110b] p-7 text-[#f2e8d5]">
+              <p className={`${monoF} mb-4 text-xs text-[#e8cdbd]`}>{"// certifications"}</p>
+              <ul className="divide-y divide-[#f2e8d5]/10">
+                {certifications.map((c) => (
+                  <li key={c.title} className="flex items-baseline justify-between gap-4 py-3">
+                    <div className="min-w-0">
+                      {c.link ? (
+                        <a href={c.link} target="_blank" rel="noreferrer" className={`${serif} text-xl font-semibold transition-colors hover:text-[#e8cdbd]`}>{c.title} ↗</a>
+                      ) : (
+                        <span className={`${serif} text-xl font-semibold`}>{c.title}</span>
+                      )}
+                      <p className="text-sm text-[#f2e8d5]/65">{c.org}</p>
+                    </div>
+                    <span className={`${monoF} shrink-0 text-xs text-[#d9b37c]`}>{c.year}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div className="mt-10 flex flex-wrap items-center gap-2">
+            <span className={`${monoF} mr-2 text-xs text-[#1c110b]/70`}>{"> off_duty"}</span>
+            {interests.map((i) => (
+              <span key={i} className="rounded-full bg-[#f2e8d5] px-4 py-2 text-sm transition-transform duration-300 hover:-rotate-3">{i}</span>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Contact — espresso */}
       <section id="contact" className="relative overflow-hidden bg-[#1c110b] text-[#f2e8d5]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(242,232,213,0.07)_1.7px,transparent_1.9px)] [background-size:28px_28px]" />
+        <div className="glow absolute -left-32 top-0 h-[30rem] w-[30rem] rounded-full bg-[#e8cdbd]/15 blur-[110px]" />
+        <div className="glow absolute -bottom-32 right-0 h-[26rem] w-[26rem] rounded-full bg-[#d9b37c]/15 blur-[110px] [animation-delay:-7s]" />
         <div className={`relative ${wrap} py-24`}>
           <p className={`${eyebrow} text-[#aab68f]`}>{"> ping kashish"}</p>
           <h2 className={`${serif} max-w-4xl text-5xl font-semibold leading-[1] md:text-7xl`}>
