@@ -31,9 +31,9 @@ const education = [
 ];
 
 const experiences = [
-  { role: "Research Assistant", company: "CUBIT Lab, Stony Brook University", location: "USA", period: "Aug 2026 to Present", type: "Research Data · Data Quality",
+  { role: "Data Analyst", company: "CUBIT Lab, Stony Brook University", location: "USA", period: "Aug 2026 to Present", type: "Research Data · Data Quality",
     bullets: ["Quality-control dashboard for health research data (actigraphy)."] },
-  { role: "Data Scientist", company: "Stony Brook University", location: "USA", period: "Aug 2025 to Dec 2025", type: "Evaluation · Statistical Analysis · Monitoring",
+  { role: "Data Analyst", company: "Stony Brook University", location: "USA", period: "Aug 2025 to Dec 2025", type: "Evaluation · Statistical Analysis · Monitoring",
     bullets: [
       "Built SQL and Python pipelines over 1M+ records and 100K+ queries to evaluate a retrieval system.",
       "Designed True-PIR metrics and bias checks to measure how stable search rankings stay.",
