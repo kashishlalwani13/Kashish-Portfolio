@@ -164,15 +164,6 @@ const recognition = [
   { title: "District Chess Champion", detail: "2023 and 2024" },
 ];
 
-const petals = [
-  { left: "8%", size: 12, dur: "19s", delay: "0s" },
-  { left: "22%", size: 9, dur: "24s", delay: "-8s" },
-  { left: "41%", size: 14, dur: "21s", delay: "-3s" },
-  { left: "58%", size: 10, dur: "26s", delay: "-14s" },
-  { left: "74%", size: 13, dur: "20s", delay: "-6s" },
-  { left: "90%", size: 9, dur: "23s", delay: "-17s" },
-];
-
 const certifications = [
   { title: "Claude 101", org: "Anthropic", year: "2026", link: "https://verify.skilljar.com/c/quupyvhd6au3" },
   { title: "Essentials of Prompt Engineering", org: "Amazon Web Services", year: "2026", link: "" },
@@ -253,13 +244,10 @@ export default function Home() {
         .ticker:hover .ticker-track { animation-play-state: paused; }
         .floaty { animation: floaty 5s ease-in-out infinite; }
         .caret { animation: blink 1s step-start infinite; }
-        @keyframes drift { 0% { transform: translateY(0) rotate(0deg); opacity: 0; } 10% { opacity: .55; } 90% { opacity: .45; } 100% { transform: translateY(-110vh) translateX(60px) rotate(320deg); opacity: 0; } }
         @keyframes glow { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-40px,30px) scale(1.12); } }
-        .petal { position: absolute; bottom: -40px; border-radius: 80% 0 80% 0; background: linear-gradient(135deg,#fbf6ec,#e8cdbd); animation: drift linear infinite; }
         .glow { animation: glow 14s ease-in-out infinite; }
         @media (prefers-reduced-motion: reduce) {
-          .rise-letter, .ticker-track, .floaty, .caret, .spin-ring, .petal, .glow { animation: none !important; }
-          .petal { display: none; }
+          .rise-letter, .ticker-track, .floaty, .caret, .spin-ring, .glow { animation: none !important; }
         }
       `}</style>
 
@@ -298,14 +286,9 @@ export default function Home() {
 
       {/* Hero — espresso */}
       <section id="top" className="relative overflow-hidden bg-[#1c110b] text-[#f2e8d5]">
-        {/* soft glow + drifting petals */}
+        {/* soft glow */}
         <div className="glow absolute -right-32 -top-20 h-[36rem] w-[36rem] rounded-full bg-[#e8cdbd]/20 blur-[110px]" />
         <div className="glow absolute -bottom-40 left-[-10rem] h-[30rem] w-[30rem] rounded-full bg-[#d9b37c]/15 blur-[110px] [animation-delay:-6s]" />
-        <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-          {petals.map((p, i) => (
-            <span key={i} className="petal" style={{ left: p.left, width: p.size, height: p.size * 1.5, animationDuration: p.dur, animationDelay: p.delay }} />
-          ))}
-        </div>
 
         <div className={`relative ${wrap} grid items-center gap-16 py-20 md:grid-cols-[1.3fr_1fr] md:py-28`}>
           <div>
